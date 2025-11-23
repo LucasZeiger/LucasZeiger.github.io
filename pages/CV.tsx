@@ -1,21 +1,29 @@
 import React from 'react';
 import Card from '../components/Card';
-import { EXPERIENCE, EDUCATION, PUBLICATIONS } from '../constants';
+import { EXPERIENCE, EDUCATION, PUBLICATIONS } from '../data/cv';
 import { Download } from 'lucide-react';
 
 const CV: React.FC = () => {
+  const handleDownload = (e: React.MouseEvent) => {
+    e.preventDefault();
+    alert("In a real deployment, this would download 'cv.pdf'. Please ensure you add a file named 'cv.pdf' to your public directory.");
+  };
+
   return (
     <div className="max-w-4xl mx-auto px-6 pb-20 animate-in slide-in-from-bottom-4 duration-700 fade-in">
-      
       <div className="flex justify-between items-end mb-12 border-b border-neutral-800 pb-8">
         <div>
           <h1 className="text-3xl font-bold text-white mb-2">Curriculum Vitae</h1>
           <p className="text-neutral-400">Academic and professional background.</p>
         </div>
-        <button className="hidden sm:flex items-center gap-2 px-4 py-2 bg-neutral-900 hover:bg-neutral-800 text-neutral-300 rounded-lg text-sm border border-neutral-800 transition-colors">
+        <a 
+          href="/cv.pdf" 
+          onClick={handleDownload}
+          className="hidden sm:flex items-center gap-2 px-4 py-2 bg-neutral-900 hover:bg-neutral-800 text-neutral-300 rounded-lg text-sm border border-neutral-800 transition-colors"
+        >
           <Download size={16} />
           <span>Download PDF</span>
-        </button>
+        </a>
       </div>
 
       <div className="space-y-16">
@@ -34,11 +42,7 @@ const CV: React.FC = () => {
                 subtitle={exp.institution}
                 date={exp.period}
               >
-                <ul className="list-disc list-outside ml-4 space-y-1 text-neutral-400">
-                  {exp.description.map((desc, i) => (
-                    <li key={i}>{desc}</li>
-                  ))}
-                </ul>
+                {exp.description}
                 <div className="mt-2 text-xs text-neutral-600 font-medium uppercase tracking-wider">
                   {exp.location}
                 </div>

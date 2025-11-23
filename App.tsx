@@ -4,6 +4,7 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import CV from './pages/CV';
 import Research from './pages/Research';
+import ResearchDetail from './pages/ResearchDetail';
 
 // Utility to detect if we are running in a restricted environment (like a Blob URL)
 // where modifying window.location (which HashRouter does) throws a SecurityError.
@@ -28,6 +29,7 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/cv" element={<CV />} />
             <Route path="/research" element={<Research />} />
+            <Route path="/research/:id" element={<ResearchDetail />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>

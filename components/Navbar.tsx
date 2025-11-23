@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Menu, X, Dna } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,11 +35,8 @@ const Navbar: React.FC = () => {
     >
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
         <NavLink to="/" className="flex items-center gap-2 group">
-          <div className="p-2 bg-neutral-900 rounded-lg group-hover:bg-neutral-800 transition-colors border border-neutral-800">
-            <Dna className="w-5 h-5 text-neutral-200" />
-          </div>
-          <span className="text-lg font-semibold tracking-tight text-neutral-100">
-            Lucas Zeiger
+          <span className="text-lg font-bold tracking-tight text-neutral-100 group-hover:text-white transition-colors">
+            Lucas Zeiger, PhD
           </span>
         </NavLink>
 
