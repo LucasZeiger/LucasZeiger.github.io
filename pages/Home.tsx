@@ -45,11 +45,11 @@ const Home: React.FC = () => {
           </div>
           
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white leading-tight">
-            Mapping the Architecture of <span className="text-neutral-500">Colorectal Cancer.</span>
+            Mapping the Architecture of <span className="text-neutral-500">Health and Disease.</span>
           </h1>
           
           <p className="text-lg text-neutral-400 leading-relaxed max-w-lg">
-            Exploring the spatial dimensions of transcriptomics to decode the tumor microenvironment.
+            Researcher based at the CRUK Scotland Institute in Glasgow.
           </p>
 
           <div className="flex flex-wrap gap-4 pt-2">
