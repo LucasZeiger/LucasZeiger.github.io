@@ -1,9 +1,10 @@
 import React, { useRef } from 'react';
-import { ArrowRight, Download, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, Download, ChevronLeft, ChevronRight, Github, Linkedin, Twitter, GraduationCap, Network, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ABOUT_TEXT, AVAILABILITY } from '../data/about';
 import { PROJECTS } from '../data/projects';
 import { EXPERIENCE, EDUCATION, PUBLICATIONS } from '../data/cv';
+import { SOCIAL_LINKS } from '../data/social';
 import ResearchCard from '../components/ResearchCard';
 import Card from '../components/Card';
 import profileImg from '../data/images/profile.jpg';
@@ -21,6 +22,13 @@ const Home: React.FC = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({ left: 320, behavior: 'smooth' });
     }
+  };
+
+  const sortedPublications = [...PUBLICATIONS].sort((a, b) => b.year - a.year);
+
+  const handleDownload = (e: React.MouseEvent) => {
+    e.preventDefault();
+    alert("In a real deployment, this would download 'cv.pdf'. Please ensure you add a file named 'cv.pdf' to your public directory.");
   };
 
   return (
@@ -45,7 +53,7 @@ const Home: React.FC = () => {
           </h1>
           
           <p className="text-lg text-neutral-400 leading-relaxed max-w-lg">
-            Lucas Zeiger, PhD | CRUK Scotland Institute | Glasgow.
+            Lucas Zeiger, PhD | CRUK Scotland Institute | Glasgow
           </p>
 
           <div className="flex flex-wrap gap-4 pt-2">
@@ -70,24 +78,79 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        {/* Image Content */}
-        <div className="relative flex justify-center md:justify-end mt-8 md:mt-0 order-1 md:order-2">
-            <div className="relative group">
-              <div className="absolute inset-0 bg-neutral-800/20 blur-2xl rounded-full transform scale-90" />
-              <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-2xl overflow-hidden border border-neutral-800 shadow-2xl bg-neutral-900 transition-all duration-700">
-                <img 
-                  src={profileImg} 
-                  alt="Lucas Zeiger" 
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/60 via-transparent to-transparent" />
-              </div>
-              
-              {/* Name Label */}
-              <div className="absolute -bottom-6 -right-6 md:bottom-6 md:-left-12 md:right-auto bg-neutral-900/90 backdrop-blur border border-neutral-800 px-6 py-3 rounded-xl shadow-xl z-20">
-                <p className="text-white font-bold text-lg whitespace-nowrap">Lucas Zeiger, PhD</p>
-              </div>
+        {/* Image Content + Social Icons */}
+        <div className="relative flex flex-col items-center md:items-end mt-8 md:mt-0 order-1 md:order-2">
+          <div className="relative group">
+            <div className="absolute inset-0 bg-neutral-800/20 blur-2xl rounded-full transform scale-90" />
+            <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-2xl overflow-hidden border border-neutral-800 shadow-2xl bg-neutral-900 transition-all duration-700">
+              <img 
+                src={profileImg} 
+                alt="Lucas Zeiger" 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/60 via-transparent to-transparent" />
             </div>
+            
+            {/* Name Label */}
+            <div className="absolute -bottom-6 -right-6 md:bottom-6 md:-left-12 md:right-auto bg-neutral-900/90 backdrop-blur border border-neutral-800 px-6 py-3 rounded-xl shadow-xl z-20">
+              <p className="text-white font-bold text-lg whitespace-nowrap">Lucas Zeiger, PhD</p>
+            </div>
+          </div>
+          {/* Social Icons */}
+          <div className="mt-10 flex gap-3">
+            <a
+              href={SOCIAL_LINKS.github}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub"
+              className="p-2 rounded-full border border-neutral-800 bg-neutral-900 text-neutral-300 hover:text-white hover:border-neutral-600 transition-colors"
+            >
+              <Github size={18} />
+            </a>
+            <a
+              href={SOCIAL_LINKS.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn"
+              className="p-2 rounded-full border border-neutral-800 bg-neutral-900 text-neutral-300 hover:text-white hover:border-neutral-600 transition-colors"
+            >
+              <Linkedin size={18} />
+            </a>
+            <a
+              href={SOCIAL_LINKS.twitter}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Twitter/X"
+              className="p-2 rounded-full border border-neutral-800 bg-neutral-900 text-neutral-300 hover:text-white hover:border-neutral-600 transition-colors"
+            >
+              <Twitter size={18} />
+            </a>
+            <a
+              href={SOCIAL_LINKS.scholar}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Google Scholar"
+              className="p-2 rounded-full border border-neutral-800 bg-neutral-900 text-neutral-300 hover:text-white hover:border-neutral-600 transition-colors"
+            >
+              <GraduationCap size={18} />
+            </a>
+            <a
+              href={SOCIAL_LINKS.researchgate}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="ResearchGate"
+              className="p-2 rounded-full border border-neutral-800 bg-neutral-900 text-neutral-300 hover:text-white hover:border-neutral-600 transition-colors"
+            >
+              <Network size={18} />
+            </a>
+            <a
+              href={`mailto:${SOCIAL_LINKS.email}`}
+              aria-label="Email"
+              className="p-2 rounded-full border border-neutral-800 bg-neutral-900 text-neutral-300 hover:text-white hover:border-neutral-600 transition-colors"
+            >
+              <Mail size={18} />
+            </a>
+          </div>
         </div>
       </section>
 
@@ -152,7 +215,7 @@ const Home: React.FC = () => {
           </div>
           <button 
              onClick={handleDownload}
-             className="flex items-center gap-2 px-4 py-2 bg-neutral-900 hover:bg-neutral-800 text-neutral-300 rounded-lg text-sm border border-neutral-800 transition-colors"
+             className="hidden"
           >
             <Download size={16} />
             <span>PDF</span>
@@ -206,8 +269,8 @@ const Home: React.FC = () => {
               <span className="w-6 h-[1px] bg-neutral-700"></span>
               Selected Publications
             </h3>
-            <div className="space-y-4">
-              {PUBLICATIONS.map((pub) => (
+           <div className="space-y-4">
+              {sortedPublications.map((pub) => (
                 <Card 
                   key={pub.id} 
                   title={pub.title} 
@@ -224,6 +287,62 @@ const Home: React.FC = () => {
             <Link to="/cv" className="inline-flex items-center gap-2 px-6 py-3 border border-neutral-800 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-900 transition-colors">
               View Full CV <ArrowRight size={16} />
             </Link>
+          </div>
+
+          {/* Footer Social Icons */}
+          <div className="flex justify-center gap-3 pt-10">
+            <a
+              href={SOCIAL_LINKS.github}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub"
+              className="p-2 rounded-full border border-neutral-800 bg-neutral-900 text-neutral-300 hover:text-white hover:border-neutral-600 transition-colors"
+            >
+              <Github size={18} />
+            </a>
+            <a
+              href={SOCIAL_LINKS.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn"
+              className="p-2 rounded-full border border-neutral-800 bg-neutral-900 text-neutral-300 hover:text-white hover:border-neutral-600 transition-colors"
+            >
+              <Linkedin size={18} />
+            </a>
+            <a
+              href={SOCIAL_LINKS.twitter}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Twitter/X"
+              className="p-2 rounded-full border border-neutral-800 bg-neutral-900 text-neutral-300 hover:text-white hover:border-neutral-600 transition-colors"
+            >
+              <Twitter size={18} />
+            </a>
+            <a
+              href={SOCIAL_LINKS.scholar}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Google Scholar"
+              className="p-2 rounded-full border border-neutral-800 bg-neutral-900 text-neutral-300 hover:text-white hover:border-neutral-600 transition-colors"
+            >
+              <GraduationCap size={18} />
+            </a>
+            <a
+              href={SOCIAL_LINKS.researchgate}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="ResearchGate"
+              className="p-2 rounded-full border border-neutral-800 bg-neutral-900 text-neutral-300 hover:text-white hover:border-neutral-600 transition-colors"
+            >
+              <Network size={18} />
+            </a>
+            <a
+              href={`mailto:${SOCIAL_LINKS.email}`}
+              aria-label="Email"
+              className="p-2 rounded-full border border-neutral-800 bg-neutral-900 text-neutral-300 hover:text-white hover:border-neutral-600 transition-colors"
+            >
+              <Mail size={18} />
+            </a>
           </div>
         </div>
       </section>

@@ -1,82 +1,67 @@
 import React from 'react';
 import { Project } from '../types';
+import spatialMapk from './images/spatial_mapk.png';
+import Slc7a5 from './images/Slc7a5.png';
 
 export const PROJECTS: Project[] = [
   {
     id: 'p1',
-    title: 'Spatial Atlas of Colorectal Tumors',
-    category: 'Research',
-    description: 'Mapping the immune landscape of colorectal cancer tissues using high-resolution spatial transcriptomics.',
+    title: 'Spatially resolving MAPK dependent CRC plasticiy',
+    category: "Research",
+    description: 'Spatial transcriptomics analysis of colorectal cancer and metastases in genetically engineered mouse models.',
     longDescription: (
       <>
         <p className="mb-4">
-          This project aims to construct a comprehensive <strong>3D spatial atlas</strong> of the colorectal tumor microenvironment. By leveraging multiplexed error-robust fluorescence in situ hybridization (MERFISH) and sequencing-based spatial transcriptomics, we are mapping the localization of over 50 distinct cell types.
+          In collaboration with the colorectal cancer and Wnt signalling group at the CRUK SI, we could demonstrate how 
+          colorectal cancer cells are able to shift their phenotype in the context of hyperactive MAPK signalling. 
         </p>
         <p>
-          The study focuses on the transition zones between normal tissue, invasive margins, and the tumor core, revealing how <em className="text-neutral-300">immune exclusion zones</em> form and persist.
+          We used a custom 100 gene panel to spatially resolve cellular plasticity in primary tumors and liver metastases.
+          The publication is available at Nature.com - DOI to follow.
+          The datasets are available at Zenodo - DOI to follow. 
         </p>
       </>
     ),
     openQuestions: [
-      'How do tertiary lymphoid structures organize spatially to promote anti-tumor immunity?',
-      'What are the spatial determinants of T-cell exhaustion in the invasive margin?',
-      'Can spatial patterns predict response to immune checkpoint blockade?'
+      'How do we exploit the fact that we can switch cell phenotypes using MAPK inhibitors?',
+      'We observed interesting signalling gradients in metastases - how can we better describe these?',
+      'Is there correlation between histological phenotype and gene expression programs that are altered as cells shift phenotype?'
     ],
-    imageUrl: 'https://picsum.photos/800/600?grayscale&blur=2',
-    tags: ['Spatial Transcriptomics', 'Immunology', 'CRC', 'Data Analysis'],
-    date: '2023 - Present',
-    link: 'https://nature.com',
-    github: 'https://github.com/LucasZeiger/crc-atlas'
+    imageUrl: spatialMapk,
+    tags: ['Spatial Transcriptomics', 'Xenium', 'Colorectal cancer', "Mouse models", "Cell Plasticity", "Signalling"],
+    date: 'Published 2025',
+    link: 'TBC',
+    github: 'TBC'
   },
   {
     id: 'p2',
-    title: 'Microenvironment Interaction Networks',
-    category: 'Computational Biology',
-    description: 'Developing graph-based deep learning models to predict cell-cell interaction probabilities.',
+    title: 'SLC7A5: An amino acid transporter fuelling colorectal cancer growth',
+    category: 'Research',
+    description: 'Development of PI3-Kinase hyperactive mouse models and identification of SLC7A5 as a therapeutic target.',
     longDescription: (
       <>
         <p className="mb-4">
-          We developed "SpatialGraph," a Graph Neural Network (GNN) framework designed to infer cell-cell communication networks from spatial transcriptomics data. Unlike traditional ligand-receptor analysis which ignores distance, SpatialGraph incorporates physical proximity and local tissue architecture to weight interaction probabilities.
+          We developed a suite of genetically engineered mouse models of colorectal cancer, harbouring mutations in the PI3-Kinase signalling pathway
+          in combination with other common CRC driver mutations, including APC and KRAS. 
+          We found the amino acid transporter SLC7A5 to be upregulated in PI3K mutant tumours, and could show that its genetic deletion
+          leads to a significant extension of survival in these models.
+          Cells display expression of a set of stress response genes and altered amino acid metabolism upon SLC7A5 deletion and in Kras mutant
+          models, SLC7A5 deletion enhances efficacy of MAPK inhibition to extend survival.  
         </p>
         <p>
-          This approach has successfully identified novel <strong>fibroblast-macrophage signaling loops</strong> driving fibrosis.
+          The paper is currently under review at Nature Communications and the preprint can be read here: https://www.researchsquare.com/article/rs-5002395/v1.
         </p>
       </>
     ),
     openQuestions: [
-      'Can we infer causality in cell-cell interactions from static snapshot data?',
-      'How do interaction networks rewire during metastatic progression?',
-      'What is the minimum spatial resolution required to accurately model paracrine signaling?'
+      'What is the full scope of cellular adaptiations upon Slc7a5 deletion, are there any synthetic lethalities we could exploit?',
+      'What setting will Slc7a5 depletion work best in the clinic?',
+      'Viewing tumours as ecosystems, what is the impact of Slc7a5 deletion on the local availability of nutrients?'
     ],
-    imageUrl: 'https://picsum.photos/800/601?grayscale&blur=2',
-    tags: ['Deep Learning', 'Python', 'Network Analysis'],
-    date: '2022 - 2023',
-    link: 'https://biorxiv.org',
-    github: 'https://github.com/LucasZeiger/spatial-graph'
+    imageUrl: Slc7a5,
+    tags: ['Disease modelling', 'Genetically engineered mouse models', 'PI3K signalling', "Colorectal Cancer", "Metabolism", "Slc7a5"],
+    date: '2017 - ongoing',
+    link: 'https://www.researchsquare.com/article/rs-5002395/v1',
+    github: 'NA'
   },
-  {
-    id: 'p3',
-    title: 'Single-Cell Integration Pipeline',
-    category: 'Software',
-    description: 'An open-source pipeline for integrating scRNA-seq data with spatial datasets to enhance resolution.',
-    longDescription: (
-      <>
-        <p className="mb-4">
-          This software suite solves the "missing modality" problem by integrating high-depth single-cell RNA sequencing data with high-resolution, low-depth spatial data. Using a probabilistic transfer learning approach, we impute genome-wide expression profiles onto spatial coordinates.
-        </p>
-        <p>
-          Effectively, this increases the information content of spatial slides by <strong>10-fold</strong>, allowing for more granular cluster annotation.
-        </p>
-      </>
-    ),
-    openQuestions: [
-      'How do we quantify uncertainty in spatially imputed gene expression?',
-      'Can this integration extend to multi-omics data like ATAC-seq and proteomics?',
-      'What are the computational limits when scaling to whole-slide imaging?'
-    ],
-    imageUrl: 'https://picsum.photos/800/602?grayscale&blur=2',
-    tags: ['R', 'Bioinformatics', 'Tool Development'],
-    date: '2021 - 2022',
-    github: 'https://github.com/LucasZeiger/sc-integration'
-  }
 ];

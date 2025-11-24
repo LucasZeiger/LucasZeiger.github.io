@@ -8,7 +8,7 @@ const Research: React.FC = () => {
       <div className="mb-16">
         <h1 className="text-4xl font-bold text-white mb-4">Research</h1>
         <p className="text-neutral-400 text-lg max-w-2xl">
-          Selected projects focusing on the intersection of spatial omics, colorectal cancer, and computational modeling.
+          Selected publications and projects I have led or contributed to.
         </p>
       </div>
 

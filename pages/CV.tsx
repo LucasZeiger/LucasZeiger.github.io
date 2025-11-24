@@ -4,6 +4,8 @@ import { EXPERIENCE, EDUCATION, PUBLICATIONS } from '../data/cv';
 import { Download } from 'lucide-react';
 
 const CV: React.FC = () => {
+  const sortedPublications = [...PUBLICATIONS].sort((a, b) => b.year - a.year);
+
   const handleDownload = (e: React.MouseEvent) => {
     e.preventDefault();
     alert("In a real deployment, this would download 'cv.pdf'. Please ensure you add a file named 'cv.pdf' to your public directory.");
@@ -19,7 +21,7 @@ const CV: React.FC = () => {
         <a 
           href="/cv.pdf" 
           onClick={handleDownload}
-          className="hidden sm:flex items-center gap-2 px-4 py-2 bg-neutral-900 hover:bg-neutral-800 text-neutral-300 rounded-lg text-sm border border-neutral-800 transition-colors"
+          className="hidden" /* kept for future use; intentionally hidden for now */
         >
           <Download size={16} />
           <span>Download PDF</span>
@@ -78,7 +80,7 @@ const CV: React.FC = () => {
             Selected Publications
           </h2>
           <div className="space-y-4">
-            {PUBLICATIONS.map((pub) => (
+            {sortedPublications.map((pub) => (
               <Card 
                 key={pub.id} 
                 title={pub.title} 

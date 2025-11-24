@@ -4,7 +4,7 @@ import { ExperienceItem, EducationItem, Publication } from '../types';
 export const EXPERIENCE: ExperienceItem[] = [
   {
     id: 'e1',
-    role: 'Postdoctoral research scientist, computational biology (PI: Crispin Miller)',
+    role: 'Postdoctoral Research Scientist, Computational Biology (with Prof. Crispin Miller)',
     institution: 'CRUK Scotland Institute',
     period: '11/2024 - Present',
     location: 'Glasgow, UK',
@@ -12,7 +12,7 @@ export const EXPERIENCE: ExperienceItem[] = [
   },
   {
     id: 'e2',
-    role: 'Postdoctoral research scientist, integrative modelling (PI: Xiao Fu)',
+    role: 'Postdoctoral Research Scientist, Integrative Modelling (with Xiao Fu, Phd)',
     institution: 'CRUK Scotland Institute',
     period: '03/2024 - 10/2024',
     location: 'Glasgow, UK',
@@ -20,7 +20,7 @@ export const EXPERIENCE: ExperienceItem[] = [
   },
   {
     id: 'e3',
-    role: 'Postdoctoral research scientist, colorectal cancer and Wnt signalling (PI: Owen Sansom)',
+    role: 'Postdoctoral Research Scientist, Colorectal Cancer and Wnt Signalling (with Prof. Owen Sansom)',
     institution: 'CRUK Scotland Institute',
     period: '07/2022 - 03/2024',
     location: 'Glasgow, UK',
@@ -28,7 +28,7 @@ export const EXPERIENCE: ExperienceItem[] = [
   },
   {
     id: 'e4',
-    role: 'PhD studentship, colorectal cancer and Wnt signalling (PI: Owen Sansom)',
+    role: 'PhD Studentship, Colorectal Cancer and Wnt Signalling (with Prof. Owen Sansom)',
     institution: 'CRUK Scotland Institute',
     period: '10/2017 - 07/2022',
     location: 'Glasgow, UK',
@@ -36,7 +36,7 @@ export const EXPERIENCE: ExperienceItem[] = [
   },
   {
   id: 'e5',
-  role: 'Master\'s thesis, department of infectiology, immunology, pneumology (PI: Ivan Tancevski)',
+  role: 'Master\'s Thesis, Department of Infectiology, Immunology, Pneumology (with Prof. Ivan Tancevski)',
   institution: 'University clinic department for internal medicine II, Medical University of Innsbruck',
   period: '02/2017 - 09/2017',
   location: 'Innsbruck, Austria',
@@ -44,7 +44,7 @@ export const EXPERIENCE: ExperienceItem[] = [
   },
   {
   id: 'e5',
-  role: 'Bachelor\'s thesis, department of  physiology & medical physics (PI: Bernhard Flucher)',
+  role: 'Bachelor\'s Thesis, Department of  Physiology & Medical Physics (with Prof. Bernhard Flucher)',
   institution: 'Medical University of Innsbruck',
   period: '03/2015 - 09/2015',
   location: 'Innsbruck, Austria',
@@ -74,6 +74,17 @@ export const EDUCATION: EducationItem[] = [
 ];
 
 export const PUBLICATIONS: Publication[] = [
+  {
+    id: 'pub0',
+    title: 'MAPK-driven epithelial cell plasticity drives colorectal cancer therapeutic resistance',
+    journal: 'Nature',
+    year: 2025,
+    authors: (
+      <>
+        White, Mark; Mills, Megan L.; Millett, Laura M.; Gilroy, Kathryn; Hong, Yourae; <strong>Zeiger, Lucas B.</strong>; Simpson, Rosalin J.; Corry, Shania M.; Ligeza, Amelia; Lannagan, Tamsin R. M.; Susanti, Susanti; Ridgway, Rachel A.; Yazgili, Ayse S.; Grzesiak, Lucile; Amirkhah, Raheleh; Ford, Catriona A.; Vlahov, Nikola; Tovell, Hannah; Officer-Jones, Leah; Ficken, Catherine; Pennie, Rachel; Najumudeen, Arafath K.; Raven, Alexander; Nasreddin, Nadia; Chauhan, Ekansh; Papanastasiou, Andrew S.; Nixon, Colin; Morrison, Vivienne; Jackstadt, Rene; Graham, Janet S.; Miller, Crispin J.; Ross, Sarah J.; Barry, Simon T.; Pavet, Valeria; Wilson, Richard H.; Le Quesne, John; Dunne, Philip D.; Tejpar, Sabine; Leedham, Simon; Campbell, Andrew D.; Sansom, Owen J.
+      </>
+    )
+  },
   {
     id: 'pub1',
     title: 'The amino acid transporter SLC7A5 drives progression of PI3K-mutant intestinal cancer models and enhances response to MAPK-targeted therapy',
