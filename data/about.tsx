@@ -7,9 +7,10 @@ export const AVAILABILITY = {
 
 export const ABOUT_TEXT = (
   <>
-    I am a scientist dedicated to unraveling the complexities of cancer through the lens of spatial transcriptomics. 
-    My work bridges the gap between molecular biology and computational analysis, aiming to understand the tumor microenvironment's architecture and its influence on disease progression and therapeutic resistance. 
+    My background is in molecular medicine and disease modelling. 
+    My current work bridges the gap between molecular and computational biology, aiming to understand fundamental and tumour biology through the lense of spatial -omics methods. 
+    Based at the CRUK Scotland Institute in Glasgow, Scotland, I work with excellent people in the multidisciplinary computational biology group, led by Prof. Crispin Miller. 
     <br /><br />
-    By preserving spatial context, we can decipher cell-cell communications that single-cell sequencing alone might miss. My goal is to translate these spatial insights into actionable therapeutic targets.
+    Please reach out if any of my research interests you using the links at the bottom of the page!
   </>
 );

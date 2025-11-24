@@ -6,6 +6,7 @@ import { PROJECTS } from '../data/projects';
 import { EXPERIENCE, EDUCATION, PUBLICATIONS } from '../data/cv';
 import ResearchCard from '../components/ResearchCard';
 import Card from '../components/Card';
+import profileImg from '../data/images/profile.jpg';
 
 const Home: React.FC = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -49,7 +50,7 @@ const Home: React.FC = () => {
           </h1>
           
           <p className="text-lg text-neutral-400 leading-relaxed max-w-lg">
-            Researcher based at the CRUK Scotland Institute in Glasgow.
+            Lucas Zeiger, PhD | CRUK Scotland Institute | Glasgow.
           </p>
 
           <div className="flex flex-wrap gap-4 pt-2">
@@ -76,9 +77,9 @@ const Home: React.FC = () => {
         <div className="relative flex justify-center md:justify-end mt-8 md:mt-0 order-1 md:order-2">
             <div className="relative group">
               <div className="absolute inset-0 bg-neutral-800/20 blur-2xl rounded-full transform scale-90" />
-              <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-2xl overflow-hidden border border-neutral-800 shadow-2xl bg-neutral-900 grayscale hover:grayscale-0 transition-all duration-700">
+              <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-2xl overflow-hidden border border-neutral-800 shadow-2xl bg-neutral-900 transition-all duration-700">
                 <img 
-                  src="https://picsum.photos/800/800?grayscale" 
+                  src={profileImg} 
                   alt="Lucas Zeiger" 
                   className="w-full h-full object-cover"
                 />
@@ -88,7 +89,6 @@ const Home: React.FC = () => {
               {/* Name Label */}
               <div className="absolute -bottom-6 -right-6 md:bottom-6 md:-left-12 md:right-auto bg-neutral-900/90 backdrop-blur border border-neutral-800 px-6 py-3 rounded-xl shadow-xl z-20">
                 <p className="text-white font-bold text-lg whitespace-nowrap">Lucas Zeiger, PhD</p>
-                <p className="text-neutral-500 text-xs font-mono uppercase tracking-wider">Research Scientist</p>
               </div>
             </div>
         </div>
