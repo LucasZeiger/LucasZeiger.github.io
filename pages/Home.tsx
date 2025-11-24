@@ -23,11 +23,6 @@ const Home: React.FC = () => {
     }
   };
 
-  const handleDownload = (e: React.MouseEvent) => {
-    e.preventDefault();
-    alert("In a real deployment, this would download 'cv.pdf'. Please ensure you add a file named 'cv.pdf' to your public directory.");
-  };
-
   return (
     <div className="animate-in fade-in duration-700">
       
@@ -63,13 +58,15 @@ const Home: React.FC = () => {
             >
               View Research <ArrowRight size={18} />
             </button>
-            <a
-              href="/cv.pdf"
-              onClick={handleDownload}
+            <button
               className="inline-flex items-center gap-2 px-6 py-3 bg-neutral-900 border border-neutral-800 text-white rounded-lg font-medium hover:bg-neutral-800 transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('cv')?.scrollIntoView({ behavior: 'smooth' });
+              }}
             >
               Curriculum Vitae
-            </a>
+            </button>
           </div>
         </div>
 
