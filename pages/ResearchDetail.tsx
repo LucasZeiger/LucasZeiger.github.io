@@ -16,7 +16,7 @@ const ResearchDetail: React.FC = () => {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center space-y-4">
         <h2 className="text-2xl font-bold text-neutral-200">Project Not Found</h2>
-        <Link to="/research" className="text-neutral-400 hover:text-white flex items-center gap-2">
+        <Link to="/research" className="text-neutral-300 hover:text-white flex items-center gap-2">
           <ArrowLeft size={16} /> Back to Research
         </Link>
       </div>
@@ -27,7 +27,7 @@ const ResearchDetail: React.FC = () => {
     <div className="max-w-4xl mx-auto px-6 pb-24 animate-in fade-in duration-500">
       <button 
         onClick={() => navigate(-1)} 
-        className="mb-8 flex items-center gap-2 text-sm text-neutral-500 hover:text-white transition-colors"
+        className="mb-8 flex items-center gap-2 text-sm text-neutral-300 hover:text-white transition-colors"
       >
         <ArrowLeft size={16} /> Back
       </button>
@@ -35,10 +35,10 @@ const ResearchDetail: React.FC = () => {
       {/* Header */}
       <div className="space-y-6 mb-12">
         <div className="flex flex-wrap items-center gap-3 text-sm">
-          <span className="px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-300">
+          <span className="px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-200">
             {project.category}
           </span>
-          <span className="flex items-center gap-1 text-neutral-500">
+          <span className="flex items-center gap-1 text-neutral-300">
             <Calendar size={14} /> {project.date}
           </span>
         </div>
@@ -75,7 +75,7 @@ const ResearchDetail: React.FC = () => {
           {/* About */}
           <section>
              <h3 className="text-xl font-semibold text-white mb-4">About the Project</h3>
-             <div className="text-neutral-400 leading-relaxed text-lg">
+             <div className="text-neutral-300 leading-relaxed text-lg">
                {project.longDescription || project.description}
              </div>
           </section>
@@ -86,8 +86,8 @@ const ResearchDetail: React.FC = () => {
               <h3 className="text-lg font-semibold text-white mb-4">Open Questions</h3>
               <ul className="space-y-3">
                 {project.openQuestions.map((q, idx) => (
-                  <li key={idx} className="flex gap-3 text-neutral-400">
-                    <span className="text-neutral-600 font-mono">0{idx + 1}</span>
+                  <li key={idx} className="flex gap-3 text-neutral-300">
+                    <span className="text-neutral-500 font-mono">0{idx + 1}</span>
                     <span>{q}</span>
                   </li>
                 ))}
@@ -102,7 +102,7 @@ const ResearchDetail: React.FC = () => {
              <h4 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Technologies</h4>
              <div className="flex flex-wrap gap-2">
                {project.tags.map(tag => (
-                 <span key={tag} className="px-2 py-1 bg-neutral-900 text-neutral-400 text-xs rounded border border-neutral-800">
+                 <span key={tag} className="px-2 py-1 bg-neutral-900 text-neutral-300 text-xs rounded border border-neutral-800">
                    {tag}
                  </span>
                ))}

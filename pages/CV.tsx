@@ -16,7 +16,7 @@ const CV: React.FC = () => {
       <div className="flex justify-between items-end mb-12 border-b border-neutral-800 pb-8">
         <div>
           <h1 className="text-3xl font-bold text-white mb-2">Curriculum Vitae</h1>
-          <p className="text-neutral-400">Academic and professional background.</p>
+          <p className="text-neutral-300">Academic and professional background.</p>
         </div>
         <a 
           href="/cv.pdf" 
@@ -45,7 +45,7 @@ const CV: React.FC = () => {
                 date={exp.period}
               >
                 {exp.description}
-                <div className="mt-2 text-xs text-neutral-600 font-medium uppercase tracking-wider">
+                <div className="mt-2 text-xs text-neutral-500 font-medium uppercase tracking-wider">
                   {exp.location}
                 </div>
               </Card>
@@ -87,7 +87,7 @@ const CV: React.FC = () => {
                 subtitle={pub.journal}
                 date={pub.year.toString()}
               >
-                <p className="italic text-neutral-500">{pub.authors}</p>
+                <p className="italic text-neutral-300">{pub.authors}</p>
               </Card>
             ))}
           </div>

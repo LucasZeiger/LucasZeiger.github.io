@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
 
   const navClasses = ({ isActive }: { isActive: boolean }) =>
     `text-sm font-medium transition-colors duration-300 hover:text-white ${
-      isActive ? 'text-white' : 'text-neutral-400'
+      isActive ? 'text-white' : 'text-neutral-300'
     }`;
 
   return (
@@ -55,7 +55,7 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-neutral-400 hover:text-white focus:outline-none"
+          className="md:hidden text-neutral-300 hover:text-white focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}

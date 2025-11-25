@@ -7,7 +7,7 @@ const Research: React.FC = () => {
     <div className="max-w-6xl mx-auto px-6 pb-20 animate-in slide-in-from-bottom-4 duration-700 fade-in">
       <div className="mb-16">
         <h1 className="text-4xl font-bold text-white mb-4">Research</h1>
-        <p className="text-neutral-400 text-lg max-w-2xl">
+        <p className="text-neutral-300 text-lg max-w-2xl">
           Selected publications and projects I have led or contributed to.
         </p>
       </div>

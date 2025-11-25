@@ -7,7 +7,7 @@ export const AVAILABILITY = {
 
 export const ABOUT_TEXT = (
   <div className="space-y-4">
-    <p>I have a background in molecular medicine and disease modelling.</p>
+    <p>Hi, I'm Lucas. I have a background in molecular medicine and disease modelling.</p>
     <p>My current work bridges the gap between molecular and computational biology, aiming to understand fundamental and tumour biology through the lense of spatial -omics methods.</p>
     <p>Based at the CRUK Scotland Institute in Glasgow, Scotland, I work with an excellent multidisciplinary team in the computational biology group, led by Prof. Crispin Miller.</p>
     <p>

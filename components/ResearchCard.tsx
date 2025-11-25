@@ -19,7 +19,7 @@ const ResearchCard: React.FC<ResearchCardProps> = ({ project }) => {
         <img 
           src={project.imageUrl} 
           alt={project.title}
-          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 grayscale group-hover:grayscale-0"
+          className="w-full h-full object-cover transform md:group-hover:scale-105 transition-transform duration-700 grayscale-0 md:grayscale md:group-hover:grayscale-0"
         />
         <div className="absolute top-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
            <div className="bg-white text-black p-1.5 rounded-full">
@@ -31,7 +31,7 @@ const ResearchCard: React.FC<ResearchCardProps> = ({ project }) => {
       {/* Content */}
       <div className="p-6 flex flex-col flex-grow">
         <div className="flex justify-between items-start mb-3">
-          <span className="text-xs font-mono text-neutral-400 bg-neutral-800 px-2 py-1 rounded border border-neutral-700">
+          <span className="text-xs font-mono text-neutral-300 bg-neutral-800 px-2 py-1 rounded border border-neutral-700">
             {project.category}
           </span>
         </div>
@@ -40,7 +40,7 @@ const ResearchCard: React.FC<ResearchCardProps> = ({ project }) => {
           {project.title}
         </h3>
         
-        <p className="text-neutral-400 text-sm leading-relaxed mb-6 line-clamp-3 flex-grow">
+        <p className="text-neutral-300 text-sm leading-relaxed mb-6 line-clamp-3 flex-grow">
           {project.description}
         </p>
 
@@ -52,7 +52,7 @@ const ResearchCard: React.FC<ResearchCardProps> = ({ project }) => {
               </span>
             ))}
           </div>
-          <span className="text-xs font-medium text-neutral-300 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+          <span className="text-xs font-medium text-neutral-200 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
             Read More <ChevronRight size={14} />
           </span>
         </div>

@@ -18,24 +18,24 @@ const Card: React.FC<CardProps> = ({ title, subtitle, date, children, tags, clas
             {title}
           </h3>
           {subtitle && (
-            <p className="text-neutral-400 font-medium text-sm mt-1">{subtitle}</p>
+            <p className="text-neutral-300 font-medium text-sm mt-1">{subtitle}</p>
           )}
         </div>
         {date && (
-          <span className="text-xs font-mono text-neutral-500 bg-neutral-900 px-2 py-1 rounded border border-neutral-800 whitespace-nowrap">
+          <span className="text-xs font-mono text-neutral-300 bg-neutral-900 px-2 py-1 rounded border border-neutral-800 whitespace-nowrap">
             {date}
           </span>
         )}
       </div>
       
-      <div className="text-neutral-400 text-sm leading-relaxed mt-3">
+      <div className="text-neutral-300 text-sm leading-relaxed mt-3">
         {children}
       </div>
 
       {tags && tags.length > 0 && (
         <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-neutral-800/50">
           {tags.map((tag) => (
-            <span key={tag} className="text-xs text-neutral-500 bg-neutral-950 px-2 py-1 rounded border border-neutral-800">
+            <span key={tag} className="text-xs text-neutral-300 bg-neutral-950 px-2 py-1 rounded border border-neutral-800">
               {tag}
             </span>
           ))}
