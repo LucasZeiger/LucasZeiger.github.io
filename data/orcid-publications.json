@@ -1,0 +1,94 @@
+{
+  "orcid": "0000-0002-8712-3112",
+  "updatedAt": "2025-12-28T21:28:23.606Z",
+  "publications": [
+    {
+      "id": "197791245",
+      "title": "MAPK-driven epithelial cell plasticity drives colorectal cancer therapeutic resistance",
+      "journal": "Nature",
+      "year": 2025,
+      "authors": "Mark White; Megan L. Mills; Laura M. Millett; Kathryn Gilroy; Yourae Hong; Lucas B. Zeiger; Rosalin J. Simpson; Shania M. Corry; Amelia Ligeza; Tamsin R. M. Lannagan; Susanti Susanti; Rachel A. Ridgway; Ayse S. Yazgili; Lucile Grzesiak; Raheleh Amirkhah; Catriona A. Ford; Nikola Vlahov; Hannah Tovell; Leah Officer-Jones; Catherine Ficken; Rachel Pennie; Arafath K. Najumudeen; Alexander Raven; Nadia Nasreddin; Ekansh Chauhan; Andrew S. Papanastasiou; Colin Nixon; Vivienne Morrison; Rene Jackstadt; Janet S. Graham; Crispin J. Miller; Sarah J. Ross; Simon T. Barry; Valeria Pavet; Richard H. Wilson; John Le Quesne; Philip D. Dunne; Sabine Tejpar; Simon Leedham; Andrew D. Campbell; Owen J. Sansom",
+      "doi": "10.1038/s41586-025-09916-w",
+      "url": "https://doi.org/10.1038/s41586-025-09916-w",
+      "orcidUrl": "https://orcid.org/0000-0002-8712-3112",
+      "type": "journal-article"
+    },
+    {
+      "id": "197761710",
+      "title": "The amino acid transporter SLC7A5 drives progression of PI3K-mutant intestinal cancer models and enhances response to MAPK-targeted therapy",
+      "journal": "",
+      "year": 2024,
+      "authors": "Lucas Zeiger; Catriona Ford; Laura Millett; Valerie Meniel; Arafath Najumudeen; Kathryn Pennel; Natalie Fisher; Kathryn Gilroy; Nathalie Sphyris; Alejandro Huerta Uribe; David Sumpton; Phimmada Hatthakarnkul; Sophie McLaughlin; Phil Jones; Bart Vanhaesebroeck; Rachel Ridgway; Colin Nixon; Helen Pearson; Toby Phesse; Simon Barry; Joanne Edwards; Philip Dunne; Andrew Campbell; Owen Sansom",
+      "doi": "10.21203/rs.3.rs-5002395/v1",
+      "url": "http://dx.doi.org/10.21203/rs.3.rs-5002395/v1",
+      "orcidUrl": "https://orcid.org/0000-0002-8712-3112",
+      "type": "preprint"
+    },
+    {
+      "id": "147191305",
+      "title": "Metabolic profiling stratifies colorectal cancer and reveals adenosylhomocysteinase as a therapeutic target",
+      "journal": "Nature Metabolism",
+      "year": 2023,
+      "authors": "Johan Vande Voorde; Rory T. Steven; Arafath K. Najumudeen; Catriona A. Ford; Alex Dexter; Ariadna Gonzalez-Fernandez; Chelsea J. Nikula; Yuchen Xiang; Lauren Ford; Stefania Maneta Stavrakaki; Kathryn Gilroy; Lucas B. Zeiger; Kathryn Pennel; Phimmada Hatthakarnkul; Efstathios A. Elia; Ammar Nasif; Teresa Murta; Eftychios Manoli; Sam Mason; Michael Gillespie; Tamsin R. M. Lannagan; Nikola Vlahov; Rachel A. Ridgway; Colin Nixon; Alexander Raven; Megan Mills; Dimitris Athineos; Georgios Kanellos; Craig Nourse; David M. Gay; Mark Hughes; Amy Burton; Bin Yan; Katherine Sellers; Vincen Wu; Kobe De Ridder; Engy Shokry; Alejandro Huerta Uribe; William Clark; Graeme Clark; Kristina Kirschner; Bernard Thienpont; Vivian S. W. Li; Oliver D. K. Maddocks; Simon T. Barry; Richard J. A. Goodwin; James Kinross; Joanne Edwards; Mariia O. Yuneva; David Sumpton; Zoltan Takats",
+      "doi": "10.1038/s42255-023-00857-0",
+      "url": "http://dx.doi.org/10.1038/s42255-023-00857-0",
+      "orcidUrl": "https://orcid.org/0000-0002-8712-3112",
+      "type": "journal-article"
+    },
+    {
+      "id": "86188577",
+      "title": "A RAC-GEF network critical for early intestinal tumourigenesis",
+      "journal": "Nature Communications",
+      "year": 2021,
+      "authors": "K. A. Pickering; K. Gilroy; J. W. Cassidy; S. K. Fey; A. K. Najumudeen; L. B. Zeiger; D. F. Vincent; D. M. Gay; J. Johansson; R. P. Fordham; B. Miller; W. Clark; A. Hedley; E. B. Unal; C. Kiel; E. McGhee; L. M. Machesky; C. Nixon; A. E. Johnsson; M. Bain; D. Strathdee; S. R. van Hoof; J. P. Medema; K. I. Anderson; S. M. Brachmann; V. M. Stucke; A. Malliri; M. Drysdale; M. Turner; L. Serrano; K. Myant; A. D. Campbell; O. J. Sansom",
+      "doi": "10.1038/s41467-020-20255-4",
+      "url": "https://doi.org/10.1038/s41467-020-20255-4",
+      "orcidUrl": "https://orcid.org/0000-0002-8712-3112",
+      "type": "journal-article"
+    },
+    {
+      "id": "89066435",
+      "title": "Implications of Peak Selection in the Interpretation of Unsupervised Mass Spectrometry Imaging Data Analyses",
+      "journal": "Analytical Chemistry",
+      "year": 2021,
+      "authors": "Authors not listed",
+      "doi": "10.1021/acs.analchem.0c04179",
+      "url": "https://doi.org/10.1021/acs.analchem.0c04179",
+      "orcidUrl": "https://orcid.org/0000-0002-8712-3112",
+      "type": "journal-article"
+    },
+    {
+      "id": "71821969",
+      "title": "The haemochromatosis gene Hfe and Kupffer cells control LDL cholesterol homeostasis and impact on atherosclerosis development",
+      "journal": "European Heart Journal",
+      "year": 2020,
+      "authors": "Egon Demetz; Piotr Tymoszuk; Richard Hilbe; Chiara Volani; David Haschka; Christiane Heim; Kristina Auer; Daniela Lener; Lucas B Zeiger; Christa Pfeifhofer-Obermair; Anna Boehm; Gerald J Obermair; Cornelia Ablinger; Stefan Coassin; Claudia Lamina; Juliane Kager; Verena Petzer; Malte Asshoff; Andrea Schroll; Manfred Nairz; Stefanie Dichtl; Markus Seifert; Laura von Raffay; Christine Fischer; Marina Barros-Pinkelnig; Natascha Brigo; Lara Valente de Souza; Sieghart Sopper; Jakob Hirsch; Michael Graber; Can Gollmann-Tepeköylü; Johannes Holfeld; Julia Halper; Sophie Macheiner; Johanna Gostner; Georg F Vogel; Raimund Pechlaner; Patrizia Moser; Medea Imboden; Pedro Marques-Vidal; Nicole M Probst-Hensch; Heike Meiselbach; Konstantin Strauch; Annette Peters; Bernhard Paulweber; Johann Willeit; Stefan Kiechl; Florian Kronenberg; Igor Theurl; Ivan Tancevski; Guenter Weiss",
+      "doi": "10.1093/eurheartj/ehaa140",
+      "url": "https://doi.org/10.1093/eurheartj/ehaa140",
+      "orcidUrl": "https://orcid.org/0000-0002-8712-3112",
+      "type": "journal-article"
+    },
+    {
+      "id": "71489442",
+      "title": "The haemochromatosis gene Hfe and Kupffer cells control LDL cholesterol homeostasis and impact on atherosclerosis development.",
+      "journal": "European heart journal",
+      "year": 2020,
+      "authors": "Demetz E; Tymoszuk P; Hilbe R; Volani C; Haschka D; Heim C; Auer K; Lener D; Zeiger LB; Pfeifhofer-Obermair C; Boehm A; Obermair GJ; Ablinger C; Weiss G",
+      "doi": "10.1093/eurheartj/ehaa140",
+      "url": "http://europepmc.org/abstract/med/32227235",
+      "orcidUrl": "https://orcid.org/0000-0002-8712-3112",
+      "type": "journal-article"
+    },
+    {
+      "id": "71489443",
+      "title": "Wnt ligands influence tumour initiation by controlling the number of intestinal stem cells.",
+      "journal": "Nature communications",
+      "year": 2018,
+      "authors": "Huels DJ; Bruens L; Hodder MC; Cammareri P; Campbell AD; Ridgway RA; Gay DM; Solar-Abboud M; Faller WJ; Nixon C; Zeiger LB; McLaughlin ME; Sansom OJ",
+      "doi": "10.1038/s41467-018-03426-2",
+      "url": "http://europepmc.org/abstract/med/29556067",
+      "orcidUrl": "https://orcid.org/0000-0002-8712-3112",
+      "type": "journal-article"
+    }
+  ]
+}

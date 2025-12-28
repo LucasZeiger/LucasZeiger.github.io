@@ -8,6 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "fetch:orcid": "node scripts/fetch-orcid-publications.mjs",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },

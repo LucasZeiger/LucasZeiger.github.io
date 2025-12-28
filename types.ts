@@ -36,6 +36,9 @@ export interface Publication {
   title: string;
   journal: string;
   year: number;
-  authors: React.ReactNode;
+  authors: string;
   doi?: string;
+  url?: string;
+  orcidUrl?: string;
+  type?: string;
 }

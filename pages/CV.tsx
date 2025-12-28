@@ -1,10 +1,31 @@
 import React from 'react';
 import Card from '../components/Card';
-import { EXPERIENCE, EDUCATION, PUBLICATIONS } from '../data/cv';
+import { EXPERIENCE, EDUCATION, FALLBACK_PUBLICATIONS } from '../data/cv';
+import orcidData from '../data/orcid-publications.json';
 import { Download } from 'lucide-react';
+import { Publication } from '../types';
 
 const CV: React.FC = () => {
-  const sortedPublications = [...PUBLICATIONS].sort((a, b) => b.year - a.year);
+  const orcidPublications = (orcidData.publications || []) as Publication[];
+  const publications = orcidPublications.length > 0 ? orcidPublications : FALLBACK_PUBLICATIONS;
+  const sortedPublications = [...publications].sort((a, b) => b.year - a.year);
+  const orcidProfileUrl = orcidData.orcid ? `https://orcid.org/${orcidData.orcid}` : undefined;
+
+  const getPublicationLink = (pub: Publication) => {
+    if (pub.doi) {
+      return { href: `https://doi.org/${pub.doi}`, label: 'DOI' };
+    }
+    if (pub.url) {
+      return { href: pub.url, label: 'Link' };
+    }
+    if (pub.orcidUrl) {
+      return { href: pub.orcidUrl, label: 'ORCID' };
+    }
+    if (orcidProfileUrl) {
+      return { href: orcidProfileUrl, label: 'ORCID' };
+    }
+    return null;
+  };
 
   const handleDownload = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -80,16 +101,67 @@ const CV: React.FC = () => {
             Selected Publications
           </h2>
           <div className="space-y-4">
-            {sortedPublications.map((pub) => (
-              <Card 
-                key={pub.id} 
-                title={pub.title} 
-                subtitle={pub.journal}
-                date={pub.year.toString()}
-              >
-                <p className="italic text-neutral-300">{pub.authors}</p>
-              </Card>
-            ))}
+            {sortedPublications.map((pub) => {
+              const primaryLink = getPublicationLink(pub);
+              const doiUrl = pub.doi ? `https://doi.org/${pub.doi}` : undefined;
+              const linkLabel = pub.url ? 'Publisher' : 'Link';
+
+              return (
+                <Card 
+                  key={pub.id} 
+                  title={
+                    primaryLink ? (
+                      <a
+                        href={primaryLink.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-neutral-100 hover:text-white transition-colors underline-offset-4 hover:underline"
+                      >
+                        {pub.title}
+                      </a>
+                    ) : (
+                      pub.title
+                    )
+                  }
+                  subtitle={pub.journal || undefined}
+                  date={pub.year ? pub.year.toString() : undefined}
+                >
+                  <p className="italic text-neutral-300">{pub.authors}</p>
+                  <div className="mt-3 flex flex-wrap gap-2 text-xs uppercase tracking-wider text-neutral-400">
+                    {doiUrl && (
+                      <a
+                        href={doiUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-2 py-1 rounded border border-neutral-800 hover:border-neutral-600 transition-colors"
+                      >
+                        DOI
+                      </a>
+                    )}
+                    {pub.url && (
+                      <a
+                        href={pub.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-2 py-1 rounded border border-neutral-800 hover:border-neutral-600 transition-colors"
+                      >
+                        {linkLabel}
+                      </a>
+                    )}
+                    {orcidProfileUrl && (
+                      <a
+                        href={orcidProfileUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-2 py-1 rounded border border-neutral-800 hover:border-neutral-600 transition-colors"
+                      >
+                        ORCID
+                      </a>
+                    )}
+                  </div>
+                </Card>
+              );
+            })}
           </div>
         </section>
 
