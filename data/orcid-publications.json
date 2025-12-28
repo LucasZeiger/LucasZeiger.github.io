@@ -1,6 +1,6 @@
 {
   "orcid": "0000-0002-8712-3112",
-  "updatedAt": "2025-12-28T21:28:23.606Z",
+  "updatedAt": "2025-12-28T22:06:34.073Z",
   "publications": [
     {
       "id": "197791245",
@@ -47,11 +47,11 @@
       "type": "journal-article"
     },
     {
-      "id": "89066435",
+      "id": "200901153",
       "title": "Implications of Peak Selection in the Interpretation of Unsupervised Mass Spectrometry Imaging Data Analyses",
       "journal": "Analytical Chemistry",
       "year": 2021,
-      "authors": "Authors not listed",
+      "authors": "Teresa Murta; Rory T. Steven; Chelsea J. Nikula; Spencer A. Thomas; Lucas B. Zeiger; Alex Dexter; Efstathios A. Elia; Bin Yan; Andrew D. Campbell; Richard J. A. Goodwin; Zoltan Takáts; Owen J. Sansom; Josephine Bunch",
       "doi": "10.1021/acs.analchem.0c04179",
       "url": "https://doi.org/10.1021/acs.analchem.0c04179",
       "orcidUrl": "https://orcid.org/0000-0002-8712-3112",
