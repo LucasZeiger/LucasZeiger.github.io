@@ -3,6 +3,7 @@ import { ArrowRight, Download, ChevronLeft, ChevronRight, Github, Linkedin, Twit
 import { Link } from 'react-router-dom';
 import { ABOUT_TEXT, AVAILABILITY } from '../data/about';
 import { PROJECTS } from '../data/projects';
+import { NEWS } from '../data/news';
 import { EXPERIENCE, EDUCATION, FALLBACK_PUBLICATIONS } from '../data/cv';
 import orcidData from '../data/orcid-publications.json';
 import { SOCIAL_LINKS } from '../data/social';
@@ -30,6 +31,28 @@ const Home: React.FC = () => {
   const publications = orcidPublications.length > 0 ? orcidPublications : FALLBACK_PUBLICATIONS;
   const sortedPublications = [...publications].sort((a, b) => b.year - a.year);
   const orcidProfileUrl = orcidData.orcid ? `https://orcid.org/${orcidData.orcid}` : undefined;
+  const sortedNews = [...NEWS].sort((a, b) => {
+    const timeA = new Date(a.date).getTime();
+    const timeB = new Date(b.date).getTime();
+
+    if (Number.isNaN(timeA)) {
+      console.warn(`Invalid news date for "${a.title}": ${a.date}`);
+    }
+    if (Number.isNaN(timeB)) {
+      console.warn(`Invalid news date for "${b.title}": ${b.date}`);
+    }
+
+    if (Number.isNaN(timeA) && Number.isNaN(timeB)) {
+      return 0;
+    }
+    if (Number.isNaN(timeA)) {
+      return 1;
+    }
+    if (Number.isNaN(timeB)) {
+      return -1;
+    }
+    return timeB - timeA;
+  });
 
   const getPublicationLink = (pub: Publication) => {
     if (pub.doi) {
@@ -224,6 +247,38 @@ const Home: React.FC = () => {
               </Link>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* News Section */}
+      <section id="news" className="py-20 border-b border-neutral-900">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
+            <div>
+              <h2 className="text-3xl font-bold text-white mb-2">News</h2>
+              <p className="text-neutral-300">Short updates and recent milestones.</p>
+            </div>
+            <Link
+              to="/news"
+              className="inline-flex items-center gap-2 text-sm text-neutral-300 hover:text-white transition-colors"
+            >
+              View all news <ArrowRight size={16} />
+            </Link>
+          </div>
+
+          <ul className="space-y-2">
+            {sortedNews.map((item) => (
+              <li key={item.id} className="text-sm text-neutral-300">
+                <span className="text-neutral-500">{item.displayDate} - </span>
+                <Link
+                  to={`/news?item=${item.id}`}
+                  className="text-neutral-200 hover:text-white transition-colors"
+                >
+                  {item.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

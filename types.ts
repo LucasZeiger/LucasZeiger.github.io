@@ -42,3 +42,12 @@ export interface Publication {
   orcidUrl?: string;
   type?: string;
 }
+
+export interface NewsItem {
+  id: string;
+  title: string;
+  date: string;
+  displayDate: string;
+  summary: string;
+  body: React.ReactNode;
+}

@@ -48,8 +48,14 @@ const Navbar: React.FC = () => {
           <NavLink to="/research" className={navClasses}>
             Research
           </NavLink>
+          <NavLink to="/news" className={navClasses}>
+            News
+          </NavLink>
           <NavLink to="/cv" className={navClasses}>
             CV
+          </NavLink>
+          <NavLink to="/playground" className={navClasses}>
+            Playground
           </NavLink>
         </div>
 
@@ -75,8 +81,14 @@ const Navbar: React.FC = () => {
           <NavLink to="/research" className={navClasses}>
             Research
           </NavLink>
+          <NavLink to="/news" className={navClasses}>
+            News
+          </NavLink>
           <NavLink to="/cv" className={navClasses}>
             CV
+          </NavLink>
+          <NavLink to="/playground" className={navClasses}>
+            Playground
           </NavLink>
         </div>
       </div>
