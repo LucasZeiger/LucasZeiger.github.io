@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="640" height="360" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="360" fill="#0f1117"/>
+  <g opacity="0.9">
+    <rect x="60" y="50" width="150" height="90" fill="#2a6fdb"/>
+    <rect x="270" y="40" width="130" height="110" fill="#2a6fdb"/>
+    <rect x="450" y="70" width="140" height="80" fill="#2a6fdb"/>
+    <rect x="80" y="210" width="170" height="95" fill="#2a6fdb"/>
+    <rect x="330" y="210" width="210" height="95" fill="#2a6fdb"/>
+
+    <path d="M210 95 L270 95" stroke="#e5b454" stroke-width="16" stroke-linecap="square"/>
+    <path d="M335 150 L335 210" stroke="#e5b454" stroke-width="16" stroke-linecap="square"/>
+    <path d="M400 110 L450 110" stroke="#e5b454" stroke-width="16" stroke-linecap="square"/>
+    <path d="M250 255 L330 255" stroke="#e5b454" stroke-width="16" stroke-linecap="square"/>
+
+    <rect x="202" y="87" width="16" height="16" fill="#e46a6a"/>
+    <rect x="262" y="87" width="16" height="16" fill="#e46a6a"/>
+    <rect x="327" y="202" width="16" height="16" fill="#e46a6a"/>
+    <rect x="392" y="102" width="16" height="16" fill="#e46a6a"/>
+    <rect x="442" y="102" width="16" height="16" fill="#e46a6a"/>
+    <rect x="242" y="247" width="16" height="16" fill="#e46a6a"/>
+    <rect x="322" y="247" width="16" height="16" fill="#e46a6a"/>
+  </g>
+
+  <text x="60" y="34" font-family="ui-sans-serif, system-ui" font-size="18" fill="#cbd5e1" opacity="0.9">
+    Procedural Dungeon Designer
+  </text>
+  <text x="60" y="330" font-family="ui-sans-serif, system-ui" font-size="14" fill="#94a3b8" opacity="0.85">
+    BSP rooms + MST corridors - step-by-step decisions
+  </text>
+</svg>
