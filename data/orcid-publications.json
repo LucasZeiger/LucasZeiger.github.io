@@ -1,6 +1,6 @@
 {
   "orcid": "0000-0002-8712-3112",
-  "updatedAt": "2025-12-29T04:42:51.299Z",
+  "updatedAt": "2026-01-05T04:51:40.587Z",
   "publications": [
     {
       "id": "197791245",
@@ -54,17 +54,6 @@
       "authors": "Teresa Murta; Rory T. Steven; Chelsea J. Nikula; Spencer A. Thomas; Lucas B. Zeiger; Alex Dexter; Efstathios A. Elia; Bin Yan; Andrew D. Campbell; Richard J. A. Goodwin; Zoltan Takáts; Owen J. Sansom; Josephine Bunch",
       "doi": "10.1021/acs.analchem.0c04179",
       "url": "https://doi.org/10.1021/acs.analchem.0c04179",
-      "orcidUrl": "https://orcid.org/0000-0002-8712-3112",
-      "type": "journal-article"
-    },
-    {
-      "id": "71821969",
-      "title": "The haemochromatosis gene Hfe and Kupffer cells control LDL cholesterol homeostasis and impact on atherosclerosis development",
-      "journal": "European Heart Journal",
-      "year": 2020,
-      "authors": "Egon Demetz; Piotr Tymoszuk; Richard Hilbe; Chiara Volani; David Haschka; Christiane Heim; Kristina Auer; Daniela Lener; Lucas B Zeiger; Christa Pfeifhofer-Obermair; Anna Boehm; Gerald J Obermair; Cornelia Ablinger; Stefan Coassin; Claudia Lamina; Juliane Kager; Verena Petzer; Malte Asshoff; Andrea Schroll; Manfred Nairz; Stefanie Dichtl; Markus Seifert; Laura von Raffay; Christine Fischer; Marina Barros-Pinkelnig; Natascha Brigo; Lara Valente de Souza; Sieghart Sopper; Jakob Hirsch; Michael Graber; Can Gollmann-Tepeköylü; Johannes Holfeld; Julia Halper; Sophie Macheiner; Johanna Gostner; Georg F Vogel; Raimund Pechlaner; Patrizia Moser; Medea Imboden; Pedro Marques-Vidal; Nicole M Probst-Hensch; Heike Meiselbach; Konstantin Strauch; Annette Peters; Bernhard Paulweber; Johann Willeit; Stefan Kiechl; Florian Kronenberg; Igor Theurl; Ivan Tancevski; Guenter Weiss",
-      "doi": "10.1093/eurheartj/ehaa140",
-      "url": "https://doi.org/10.1093/eurheartj/ehaa140",
       "orcidUrl": "https://orcid.org/0000-0002-8712-3112",
       "type": "journal-article"
     },
