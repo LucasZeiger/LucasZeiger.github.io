@@ -1,12 +1,34 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { PLAYGROUND_ITEMS } from '../data/playground';
+import orcidData from '../data/orcid-publications.json';
 
 const PREVIEW_BASE_WIDTH = 1200;
 const PREVIEW_BASE_HEIGHT = 800;
 const PREVIEW_SCALE = 0.1;
 const CANVAS_OFFSET_X = 360;
 const CANVAS_OFFSET_Y = 40;
+// Keep in sync with the initial canvas layout in pages/SynthCanvasPage.tsx.
+const SYNTH_THUMB_MODULES = [
+  { id: 'kbd1', type: 'keyboard', x: 20, y: 20, width: 220 },
+  { id: 'osc1', type: 'osc', x: 320, y: 20, width: 220 },
+  { id: 'flt1', type: 'filter', x: 620, y: 20, width: 220 },
+  { id: 'env1', type: 'adsr', x: 320, y: 360, width: 220 },
+  { id: 'vca1', type: 'vca', x: 620, y: 360, width: 220 },
+  { id: 'out1', type: 'output', x: 920, y: 280, width: 220 },
+  { id: 'lfo1', type: 'lfo', x: 20, y: 360, width: 220 },
+  { id: 'scp1', type: 'scope', x: 920, y: 20, width: 240 }
+];
+const SYNTH_THUMB_CABLES = [
+  { from: { moduleId: 'kbd1' }, to: { moduleId: 'osc1' } },
+  { from: { moduleId: 'kbd1' }, to: { moduleId: 'env1' } },
+  { from: { moduleId: 'env1' }, to: { moduleId: 'vca1' } },
+  { from: { moduleId: 'osc1' }, to: { moduleId: 'flt1' } },
+  { from: { moduleId: 'flt1' }, to: { moduleId: 'vca1' } },
+  { from: { moduleId: 'vca1' }, to: { moduleId: 'out1' } },
+  { from: { moduleId: 'lfo1' }, to: { moduleId: 'flt1' } },
+  { from: { moduleId: 'vca1' }, to: { moduleId: 'scp1' } }
+];
 
 const IframeThumbnail: React.FC<{ title: string; src: string; focus?: 'canvas' }> = ({
   title,
@@ -246,6 +268,175 @@ const CellularAutomataThumbnail: React.FC = () => {
   );
 };
 
+const computeThumbnailLayout = (
+  nodes: string[],
+  edges: Array<{ source: string; target: string; weight: number }>,
+  width: number,
+  height: number
+) => {
+  const centerX = width / 2;
+  const centerY = height / 2;
+  const radius = Math.min(width, height) * 0.28;
+  const positions = nodes.map((node, index) => {
+    const angle = (index / nodes.length) * Math.PI * 2;
+    return {
+      id: node,
+      x: centerX + Math.cos(angle) * radius,
+      y: centerY + Math.sin(angle) * radius
+    };
+  });
+  const velocities = nodes.map(() => ({ x: 0, y: 0 }));
+  const nodeIndex = new Map(nodes.map((node, index) => [node, index]));
+  const steps = 140;
+  const repulsion = 1200;
+  const attraction = 0.05;
+  const damping = 0.85;
+  const margin = 6;
+
+  for (let step = 0; step < steps; step += 1) {
+    for (let i = 0; i < positions.length; i += 1) {
+      for (let j = i + 1; j < positions.length; j += 1) {
+        const dx = positions[i].x - positions[j].x;
+        const dy = positions[i].y - positions[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+        const force = repulsion / (dist * dist);
+        const fx = (dx / dist) * force;
+        const fy = (dy / dist) * force;
+        velocities[i].x += fx;
+        velocities[i].y += fy;
+        velocities[j].x -= fx;
+        velocities[j].y -= fy;
+      }
+    }
+
+    edges.forEach((edge) => {
+      const sourceIndex = nodeIndex.get(edge.source);
+      const targetIndex = nodeIndex.get(edge.target);
+      if (sourceIndex === undefined || targetIndex === undefined) {
+        return;
+      }
+      const dx = positions[targetIndex].x - positions[sourceIndex].x;
+      const dy = positions[targetIndex].y - positions[sourceIndex].y;
+      const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+      const strength = attraction * edge.weight;
+      const fx = (dx / dist) * strength;
+      const fy = (dy / dist) * strength;
+      velocities[sourceIndex].x += fx;
+      velocities[sourceIndex].y += fy;
+      velocities[targetIndex].x -= fx;
+      velocities[targetIndex].y -= fy;
+    });
+
+    for (let i = 0; i < positions.length; i += 1) {
+      velocities[i].x *= damping;
+      velocities[i].y *= damping;
+      positions[i].x += velocities[i].x;
+      positions[i].y += velocities[i].y;
+      positions[i].x = Math.min(width - margin, Math.max(margin, positions[i].x));
+      positions[i].y = Math.min(height - margin, Math.max(margin, positions[i].y));
+    }
+  }
+
+  return new Map(positions.map((node) => [node.id, { x: node.x, y: node.y }]));
+};
+
+const PublicationsExplorerThumbnail: React.FC = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) {
+      return undefined;
+    }
+    const ctx = canvas.getContext('2d');
+    if (!ctx) {
+      return undefined;
+    }
+
+    const width = 120;
+    const height = 80;
+    canvas.width = width;
+    canvas.height = height;
+
+    const counts = new Map<string, number>();
+    orcidData.publications.forEach((pub) => {
+      const raw = pub.authors.includes(';') ? pub.authors.split(';') : pub.authors.split(',');
+      raw
+        .map((author) => author.trim())
+        .filter(Boolean)
+        .forEach((author) => {
+          counts.set(author, (counts.get(author) ?? 0) + 1);
+        });
+    });
+
+    const nodeLimit = Math.min(16, counts.size);
+    const nodes = Array.from(counts.entries())
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, nodeLimit)
+      .map(([author]) => author);
+
+    const nodeSet = new Set(nodes);
+    const edgeCounts = new Map<string, number>();
+    orcidData.publications.forEach((pub) => {
+      const raw = pub.authors.includes(';') ? pub.authors.split(';') : pub.authors.split(',');
+      const filtered = raw
+        .map((author) => author.trim())
+        .filter((author) => nodeSet.has(author));
+      for (let i = 0; i < filtered.length; i += 1) {
+        for (let j = i + 1; j < filtered.length; j += 1) {
+          const source = filtered[i];
+          const target = filtered[j];
+          const key = source < target ? `${source}|||${target}` : `${target}|||${source}`;
+          edgeCounts.set(key, (edgeCounts.get(key) ?? 0) + 1);
+        }
+      }
+    });
+
+    const edges = Array.from(edgeCounts.entries()).map(([key, weight]) => {
+      const [source, target] = key.split('|||');
+      return { source, target, weight };
+    });
+    const positions = computeThumbnailLayout(nodes, edges, width, height);
+
+    ctx.fillStyle = '#050608';
+    ctx.fillRect(0, 0, width, height);
+
+    ctx.strokeStyle = 'rgba(148, 163, 184, 0.25)';
+    ctx.lineWidth = 1;
+    edges.forEach(({ source, target }) => {
+      const sourcePos = positions.get(source);
+      const targetPos = positions.get(target);
+      if (!sourcePos || !targetPos) {
+        return;
+      }
+      ctx.beginPath();
+      ctx.moveTo(sourcePos.x, sourcePos.y);
+      ctx.lineTo(targetPos.x, targetPos.y);
+      ctx.stroke();
+    });
+
+    nodes.forEach((node, index) => {
+      const pos = positions.get(node);
+      if (!pos) {
+        return;
+      }
+      const isPrimary = node.toLowerCase().includes('zeiger');
+      ctx.beginPath();
+      ctx.fillStyle = isPrimary ? '#f472b6' : index % 2 === 0 ? '#60a5fa' : '#34d399';
+      ctx.arc(pos.x, pos.y, isPrimary ? 4 : 3, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    return undefined;
+  }, []);
+
+  return (
+    <div className="w-24 h-16 rounded-lg border border-neutral-800 bg-neutral-950/70 overflow-hidden">
+      <canvas ref={canvasRef} className="w-full h-full" />
+    </div>
+  );
+};
+
 
 const PlaygroundThumbnail: React.FC<{ id: string; title: string; previewPath?: string }> = ({
   id,
@@ -260,6 +451,19 @@ const PlaygroundThumbnail: React.FC<{ id: string; title: string; previewPath?: s
   }
   if (id === 'location-pulse') {
     return <LocationPulseThumbnail />;
+  }
+  if (id === 'publications-explorer') {
+    return <PublicationsExplorerThumbnail />;
+  }
+  if (id === 'modular-synth') {
+    return <SynthThumbnail />;
+  }
+  if (id === 'dungeon-designer' && previewPath) {
+    return (
+      <div className="w-24 h-16 rounded-lg border border-neutral-800 bg-neutral-950/70 overflow-hidden">
+        <img src={previewPath} alt={`${title} preview`} className="w-full h-full object-cover" loading="lazy" />
+      </div>
+    );
   }
   return (
     <div className="w-24 h-16 rounded-lg border border-neutral-800 bg-neutral-950/70 flex items-center justify-center">
@@ -341,6 +545,165 @@ const LocationPulseThumbnail: React.FC = () => {
         cancelAnimationFrame(animationRef.current);
       }
     };
+  }, []);
+
+  return (
+    <div className="w-24 h-16 rounded-lg border border-neutral-800 bg-neutral-950/70 overflow-hidden">
+      <canvas ref={canvasRef} className="w-full h-full" />
+    </div>
+  );
+};
+
+const SynthThumbnail: React.FC = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) {
+      return undefined;
+    }
+    const ctx = canvas.getContext('2d');
+    if (!ctx) {
+      return undefined;
+    }
+
+    const width = 120;
+    const height = 80;
+    canvas.width = width;
+    canvas.height = height;
+
+    const modules = SYNTH_THUMB_MODULES;
+    const cables = SYNTH_THUMB_CABLES;
+    const moduleHeights: Record<string, number> = {
+      scope: 190,
+      output: 140,
+      default: 160
+    };
+    const moduleColors: Record<string, string> = {
+      keyboard: '#0f172a',
+      osc: '#111827',
+      filter: '#0b1120',
+      adsr: '#111827',
+      vca: '#0f172a',
+      output: '#111827',
+      lfo: '#0b1120',
+      scope: '#0f172a'
+    };
+
+    let minX = Infinity;
+    let minY = Infinity;
+    let maxX = -Infinity;
+    let maxY = -Infinity;
+
+    modules.forEach((module) => {
+      const moduleHeight = moduleHeights[module.type] ?? moduleHeights.default;
+      minX = Math.min(minX, module.x);
+      minY = Math.min(minY, module.y);
+      maxX = Math.max(maxX, module.x + module.width);
+      maxY = Math.max(maxY, module.y + moduleHeight);
+    });
+
+    const padding = 6;
+    const rangeX = maxX - minX || 1;
+    const rangeY = maxY - minY || 1;
+    const scale = Math.min((width - padding * 2) / rangeX, (height - padding * 2) / rangeY);
+    const extraX = width - padding * 2 - rangeX * scale;
+    const extraY = height - padding * 2 - rangeY * scale;
+    const offsetX = padding + extraX / 2 - minX * scale;
+    const offsetY = padding + extraY / 2 - minY * scale;
+
+    const mapPoint = (x: number, y: number) => ({
+      x: x * scale + offsetX,
+      y: y * scale + offsetY
+    });
+
+    ctx.fillStyle = '#050608';
+    ctx.fillRect(0, 0, width, height);
+
+    ctx.strokeStyle = 'rgba(148, 163, 184, 0.15)';
+    ctx.lineWidth = 1;
+    const gridSize = 120;
+    const gridStartX = Math.floor(minX / gridSize) * gridSize;
+    const gridStartY = Math.floor(minY / gridSize) * gridSize;
+    for (let x = gridStartX; x <= maxX; x += gridSize) {
+      const mappedX = mapPoint(x, minY).x;
+      ctx.beginPath();
+      ctx.moveTo(mappedX, padding);
+      ctx.lineTo(mappedX, height - padding);
+      ctx.stroke();
+    }
+    for (let y = gridStartY; y <= maxY; y += gridSize) {
+      const mappedY = mapPoint(minX, y).y;
+      ctx.beginPath();
+      ctx.moveTo(padding, mappedY);
+      ctx.lineTo(width - padding, mappedY);
+      ctx.stroke();
+    }
+
+    const moduleCenters = new Map<string, { x: number; y: number }>();
+
+    modules.forEach((module) => {
+      const moduleHeight = moduleHeights[module.type] ?? moduleHeights.default;
+      const center = mapPoint(module.x + module.width / 2, module.y + moduleHeight / 2);
+      moduleCenters.set(module.id, center);
+    });
+
+    ctx.strokeStyle = 'rgba(56, 189, 248, 0.5)';
+    ctx.lineWidth = 1.5;
+    cables.forEach((cable) => {
+      const from = moduleCenters.get(cable.from.moduleId);
+      const to = moduleCenters.get(cable.to.moduleId);
+      if (!from || !to) {
+        return;
+      }
+      ctx.beginPath();
+      ctx.moveTo(from.x, from.y);
+      ctx.lineTo(to.x, to.y);
+      ctx.stroke();
+    });
+
+    const drawRoundedRect = (x: number, y: number, w: number, h: number, r: number) => {
+      const radius = Math.min(r, w / 2, h / 2);
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + w - radius, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + radius);
+      ctx.lineTo(x + w, y + h - radius);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - radius, y + h);
+      ctx.lineTo(x + radius, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+    };
+
+    modules.forEach((module) => {
+      const moduleHeight = moduleHeights[module.type] ?? moduleHeights.default;
+      const topLeft = mapPoint(module.x, module.y);
+      const moduleWidth = module.width * scale;
+      const scaledHeight = moduleHeight * scale;
+      const fill = moduleColors[module.type] ?? '#0f172a';
+      drawRoundedRect(topLeft.x, topLeft.y, moduleWidth, scaledHeight, 6);
+      ctx.fillStyle = fill;
+      ctx.fill();
+      ctx.strokeStyle = '#1f2937';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.7)';
+      ctx.fillRect(topLeft.x, topLeft.y, moduleWidth, Math.min(10 * scale + 4, scaledHeight));
+
+      if (module.type === 'scope') {
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.5)';
+        ctx.beginPath();
+        ctx.moveTo(topLeft.x + moduleWidth * 0.2, topLeft.y + scaledHeight * 0.6);
+        ctx.lineTo(topLeft.x + moduleWidth * 0.45, topLeft.y + scaledHeight * 0.5);
+        ctx.lineTo(topLeft.x + moduleWidth * 0.7, topLeft.y + scaledHeight * 0.6);
+        ctx.stroke();
+      }
+    });
+
+    return undefined;
   }, []);
 
   return (

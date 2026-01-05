@@ -333,6 +333,7 @@ const buildGrid = (width: number, height: number, spacing: number) => {
 
 const HalftoneVisualizer: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number>(0);
   const frameRef = useRef<number>(0);
@@ -364,6 +365,7 @@ const HalftoneVisualizer: React.FC = () => {
   const [isRunning, setIsRunning] = useState(true);
   const [isExporting, setIsExporting] = useState(false);
   const [exportStatus, setExportStatus] = useState<string | null>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const currentPreset = useMemo(() => PRESETS.find((item) => item.id === presetId) ?? PRESETS[0], [presetId]);
   const isLoopPerfect = Number.isInteger(waveSpeed) && frames > 0;
@@ -586,6 +588,15 @@ const HalftoneVisualizer: React.FC = () => {
     setForeground(rgbToHex(nextRgb.r, nextRgb.g, nextRgb.b));
   }, [foregroundHue, foregroundSaturation, foregroundLightness]);
 
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(document.fullscreenElement === stageRef.current);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
+
   const handleColorChange = (
     color: string,
     setColor: React.Dispatch<React.SetStateAction<string>>,
@@ -694,46 +705,84 @@ const HalftoneVisualizer: React.FC = () => {
     }
   };
 
+  const toggleFullscreen = async () => {
+    if (!stageRef.current) {
+      return;
+    }
+
+    try {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+      } else {
+        await stageRef.current.requestFullscreen();
+      }
+    } catch (error) {
+      console.error('Fullscreen request failed', error);
+    }
+  };
 
   return (
-    <div className="grid lg:grid-cols-[320px_1fr] gap-6">
-      <div className="border border-neutral-800/70 rounded-xl p-5 bg-neutral-900/30 space-y-4">
-        <div className="flex items-center justify-between">
-          <div className="space-y-2">
-            <h3 className="text-lg font-semibold text-white">Controls</h3>
-            <span
-              className={`text-[11px] uppercase tracking-widest px-2 py-1 rounded-full border ${
-                isLoopPerfect
-                  ? 'border-emerald-500/40 text-emerald-300 bg-emerald-500/10'
-                  : 'border-amber-500/40 text-amber-300 bg-amber-500/10'
-              }`}
-            >
-              {isLoopPerfect ? 'Perfect loop' : 'Loop warning'}
-            </span>
-          </div>
-          <button
-            className="text-xs uppercase tracking-wider px-3 py-1 rounded-full border border-neutral-800 text-neutral-300 hover:text-white"
-            onClick={() => setIsRunning((prev) => !prev)}
-          >
-            {isRunning ? 'Pause' : 'Play'}
-          </button>
+    <div
+      ref={stageRef}
+      className={`border border-transparent rounded-2xl flex flex-col ${
+        isFullscreen ? 'bg-neutral-950 p-6 h-full' : ''
+      }`}
+    >
+      <div className="flex items-center justify-between mb-4">
+        <div className="space-y-1">
+          <h3 className="text-lg font-semibold text-white">Halftone Loop</h3>
+          <p className="text-xs text-neutral-400">Adjust parameters and export perfect loops.</p>
         </div>
+        <button
+          className="text-xs uppercase tracking-wider px-3 py-1 rounded-full border border-neutral-800 text-neutral-300 hover:text-white"
+          onClick={toggleFullscreen}
+        >
+          {isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
+        </button>
+      </div>
 
-        <div className="space-y-3 text-sm text-neutral-300">
-          <label className="flex items-center justify-between gap-4">
-            <span>Preset</span>
-            <select
-              value={presetId}
-              onChange={(e) => setPresetId(e.target.value)}
-              className="w-44 bg-neutral-950/60 border border-neutral-800 rounded px-2 py-1 text-right"
+      <div className={`grid lg:grid-cols-[320px_1fr] gap-6 min-h-0 ${isFullscreen ? 'flex-1' : ''}`}>
+        <div
+          className={`border border-neutral-800/70 rounded-xl p-5 bg-neutral-900/30 space-y-4 ${
+            isFullscreen ? 'max-h-full overflow-auto' : ''
+          }`}
+        >
+          <div className="flex items-center justify-between">
+            <div className="space-y-2">
+              <h3 className="text-lg font-semibold text-white">Controls</h3>
+              <span
+                className={`text-[11px] uppercase tracking-widest px-2 py-1 rounded-full border ${
+                  isLoopPerfect
+                    ? 'border-emerald-500/40 text-emerald-300 bg-emerald-500/10'
+                    : 'border-amber-500/40 text-amber-300 bg-amber-500/10'
+                }`}
+              >
+                {isLoopPerfect ? 'Perfect loop' : 'Loop warning'}
+              </span>
+            </div>
+            <button
+              className="text-xs uppercase tracking-wider px-3 py-1 rounded-full border border-neutral-800 text-neutral-300 hover:text-white"
+              onClick={() => setIsRunning((prev) => !prev)}
             >
-              {PRESETS.map((item) => (
-                <option key={item.id} value={item.id}>
-                  {item.label}
-                </option>
-              ))}
-            </select>
-          </label>
+              {isRunning ? 'Pause' : 'Play'}
+            </button>
+          </div>
+
+          <div className="space-y-3 text-sm text-neutral-300">
+            <label className="flex items-center justify-between gap-4">
+              <span>Preset</span>
+              <select
+                value={presetId}
+                onChange={(e) => setPresetId(e.target.value)}
+                className="w-44 bg-neutral-950/60 border border-neutral-800 rounded px-2 py-1 text-right"
+              >
+                {PRESETS.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.label}
+                  </option>
+                ))}
+              </select>
+            </label>
           <label className="flex items-center justify-between gap-4">
             <span>Width</span>
             <input
@@ -938,38 +987,42 @@ const HalftoneVisualizer: React.FC = () => {
               className="w-40 accent-pink-300"
             />
           </label>
-          <label className="flex items-center justify-between gap-4">
-            <span>Foreground Light</span>
-            <input
-              type="range"
-              min={10}
-              max={95}
-              value={foregroundLightness}
-              onChange={(e) => setForegroundLightness(Number(e.target.value))}
-              className="w-40 accent-pink-300"
-            />
-          </label>
+            <label className="flex items-center justify-between gap-4">
+              <span>Foreground Light</span>
+              <input
+                type="range"
+                min={10}
+                max={95}
+                value={foregroundLightness}
+                onChange={(e) => setForegroundLightness(Number(e.target.value))}
+                className="w-40 accent-pink-300"
+              />
+            </label>
+          </div>
+
+          <div className="border-t border-neutral-800 pt-4 space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="text-xs uppercase tracking-wider text-neutral-400">Export Loop</span>
+              {exportStatus && <span className="text-xs text-neutral-400">{exportStatus}</span>}
+            </div>
+            <div className="text-xs uppercase tracking-wider">
+              <button
+                onClick={() => exportVideo()}
+                disabled={isExporting}
+                className="w-full rounded-lg border border-neutral-800 px-3 py-2 text-neutral-200 hover:text-white hover:border-neutral-600 disabled:opacity-40"
+              >
+                Export WebM
+              </button>
+            </div>
+          </div>
         </div>
 
-        <div className="border-t border-neutral-800 pt-4 space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="text-xs uppercase tracking-wider text-neutral-400">Export Loop</span>
-            {exportStatus && <span className="text-xs text-neutral-400">{exportStatus}</span>}
-          </div>
-          <div className="text-xs uppercase tracking-wider">
-            <button
-              onClick={() => exportVideo()}
-              disabled={isExporting}
-              className="w-full rounded-lg border border-neutral-800 px-3 py-2 text-neutral-200 hover:text-white hover:border-neutral-600 disabled:opacity-40"
-            >
-              Export WebM
-            </button>
-          </div>
+        <div className="border border-neutral-800/70 rounded-xl p-4 bg-neutral-900/30 flex flex-col min-h-0">
+          <canvas
+            ref={canvasRef}
+            className={`rounded-lg bg-neutral-950 ${isFullscreen ? 'w-full h-full flex-1' : 'w-full'}`}
+          />
         </div>
-      </div>
-
-      <div className="border border-neutral-800/70 rounded-xl p-4 bg-neutral-900/30">
-        <canvas ref={canvasRef} className="w-full rounded-lg bg-neutral-950" />
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import ResearchDetail from './pages/ResearchDetail';
 import News from './pages/News';
 import Playground from './pages/Playground';
 import PlaygroundDetail from './pages/PlaygroundDetail';
+import SynthCanvasPage from './pages/SynthCanvasPage';
 
 // Utility to detect if we are running in a restricted environment (like a Blob URL)
 // where modifying window.location (which HashRouter does) throws a SecurityError.
@@ -36,6 +37,7 @@ const App: React.FC = () => {
             <Route path="/news" element={<News />} />
             <Route path="/playground" element={<Playground />} />
             <Route path="/playground/:id" element={<PlaygroundDetail />} />
+            <Route path="/synth" element={<SynthCanvasPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>
