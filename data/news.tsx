@@ -3,10 +3,10 @@ import { NewsItem } from '../types';
 
 export const NEWS: NewsItem[] = [
   {
-    id: 'CRC-STARS Birmingham',
+    id: 'CRC-STARS-Birmingham',
     title: '1st annual CRC-STARS meeting in Birmingham',
     date: '2026-02-02',
-    displayDate: '02 Jan 2026',
+    displayDate: '02 Feb 2026',
     summary: '1st annual CRC-STARS meeting in Birmingham.',
     body: (
       <>
