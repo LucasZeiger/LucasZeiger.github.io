@@ -3,6 +3,18 @@ import { NewsItem } from '../types';
 
 export const NEWS: NewsItem[] = [
   {
+    id: 'CRC-STARS Birmingham',
+    title: '1st annual CRC-STARS meeting in Birmingham',
+    date: '2026-02-02',
+    displayDate: '02 Jan 2026',
+    summary: '1st annual CRC-STARS meeting in Birmingham.',
+    body: (
+      <>
+        <p> Attended the first annual CRC STARS meeting in Birmingham - great to catch up with everyone! </p>
+      </>
+    )
+  },
+  {
     id: 'merry-christmas-2025',
     title: 'Merry Christmas and a happy new year!',
     date: '2025-12-24',
