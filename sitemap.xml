@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://lucaszeiger.github.io/</loc>
-  </url>
-  <url>
-    <loc>https://lucaszeiger.github.io/research</loc>
-  </url>
-  <url>
-    <loc>https://lucaszeiger.github.io/cv</loc>
-  </url>
+  <url><loc>https://lucaszeiger.github.io/</loc></url>
+  <url><loc>https://lucaszeiger.github.io/research/</loc></url>
+  <url><loc>https://lucaszeiger.github.io/cv/</loc></url>
+  <url><loc>https://lucaszeiger.github.io/news/</loc></url>
+  <url><loc>https://lucaszeiger.github.io/playground/</loc></url>
+  <url><loc>https://lucaszeiger.github.io/research/p1/</loc></url>
+  <url><loc>https://lucaszeiger.github.io/research/p2/</loc></url>
+  <url><loc>https://lucaszeiger.github.io/playground/cellular-automata/</loc></url>
+  <url><loc>https://lucaszeiger.github.io/playground/halftone-loop/</loc></url>
+  <url><loc>https://lucaszeiger.github.io/playground/location-pulse/</loc></url>
+  <url><loc>https://lucaszeiger.github.io/playground/publications-explorer/</loc></url>
+  <url><loc>https://lucaszeiger.github.io/playground/modular-synth/</loc></url>
+  <url><loc>https://lucaszeiger.github.io/playground/dungeon-designer/</loc></url>
 </urlset>

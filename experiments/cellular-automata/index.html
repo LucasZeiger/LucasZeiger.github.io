@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cellular Automata Visualizer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="header">
+        <div>
+          <h1>Cellular Automata</h1>
+          <p class="subtitle">Conway’s Game of Life with classic presets</p>
+        </div>
+        <div class="status" id="status">Paused</div>
+      </header>
+
+      <main class="main">
+        <section class="panel">
+          <div class="control-group">
+            <label for="preset">Preset</label>
+            <select id="preset"></select>
+            <p id="preset-description" class="helper"></p>
+          </div>
+
+          <div class="control-group">
+            <label for="theme">Theme</label>
+            <select id="theme"></select>
+          </div>
+
+          <div class="control-row">
+            <button id="toggle">Start</button>
+            <button id="step">Step</button>
+            <button id="clear">Clear</button>
+          </div>
+
+          <div class="control-group">
+            <label for="speed">Speed</label>
+            <div class="range-row">
+              <input id="speed" type="range" min="1" max="30" value="12" />
+              <span id="speed-value">12</span>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label for="cell-size">Cell Size</label>
+            <div class="range-row">
+              <input id="cell-size" type="range" min="6" max="28" value="14" />
+              <span id="cell-size-value">14</span>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label for="density">Random Density</label>
+            <div class="range-row">
+              <input id="density" type="range" min="5" max="60" value="22" />
+              <span id="density-value">22%</span>
+            </div>
+          </div>
+
+          <div class="control-group toggle-row">
+            <label for="wrap-edges">Wrap Edges</label>
+            <input id="wrap-edges" type="checkbox" checked />
+          </div>
+
+          <div class="control-row">
+            <button id="random">Randomize</button>
+            <button id="reset">Reset Preset</button>
+          </div>
+
+          <div class="stats">
+            <div>
+              <span class="label">Grid</span>
+              <span id="grid-size">0 x 0</span>
+            </div>
+            <div>
+              <span class="label">Generation</span>
+              <span id="generation">0</span>
+            </div>
+            <div>
+              <span class="label">Alive</span>
+              <span id="alive">0</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="canvas-wrap">
+          <canvas id="canvas" aria-label="Cellular automata grid" role="img"></canvas>
+          <div class="hint">Click or drag to toggle cells</div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
