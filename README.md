@@ -18,3 +18,17 @@ Run `npm run preview` to inspect the production build. To publish manually, use
 `npm run deploy`; pushing to `main` also triggers the GitHub Pages workflow.
 Standalone embedded apps live under `public/experiments/` so their index files
 cannot collide with the site's routes under `/playground/`.
+
+## News updates
+
+Run `npm run news:init` to create your local `Documents/Website Inbox`.
+Put rough text or an Evernote HTML export and pictures into one folder per update.
+Then tell Codex: "Prepare a news update from my inbox." Codex can format the text
+and pictures and show the actual site at `http://127.0.0.1:4175/news` for review.
+Ask to publish separately after reviewing it. Dropping files does not start an
+unattended agent or publish anything.
+
+Published posts are Markdown files under `content/news/`. Notes and drafts stay
+outside the public repository. See [the news workflow](docs/news-workflow.md) for
+the preparation, preview, and approval commands. `npm run check:news` exercises
+the import workflow and checks that drafts never enter normal builds.

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getRouteMetadata } from '../data/siteRoutes';
+import { NEWS_PREVIEW } from '../data/news';
 
 const RouteEffects = () => {
   const { pathname } = useLocation();
@@ -8,6 +9,7 @@ const RouteEffects = () => {
   useEffect(() => {
     const metadata = getRouteMetadata(pathname);
     document.title = metadata.title;
+    if (NEWS_PREVIEW) document.querySelector('meta[name="robots"]')?.setAttribute('content', 'noindex, nofollow');
     const values = {
       'meta[name="description"]': metadata.description,
       'meta[property="og:title"]': metadata.title,

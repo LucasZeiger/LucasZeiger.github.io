@@ -49,5 +49,13 @@ export interface NewsItem {
   date: string;
   displayDate: string;
   summary: string;
-  body: React.ReactNode;
+  body: string;
+  draft: boolean;
+  images: {
+    src: string;
+    alt: string;
+    caption: string;
+    width: number;
+    height: number;
+  }[];
 }

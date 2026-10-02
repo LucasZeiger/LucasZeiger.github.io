@@ -5,10 +5,11 @@ import Home from './pages/Home';
 import CV from './pages/CV';
 import Research from './pages/Research';
 import ResearchDetail from './pages/ResearchDetail';
-import News from './pages/News';
 import RouteEffects from './components/RouteEffects';
+import { NEWS_PREVIEW } from './data/news';
 
 const Playground = lazy(() => import('./pages/Playground'));
+const News = lazy(() => import('./pages/News'));
 const PlaygroundDetail = lazy(() => import('./pages/PlaygroundDetail'));
 const SynthCanvasPage = lazy(() => import('./pages/SynthCanvasPage'));
 
@@ -16,6 +17,14 @@ export const AppContent: React.FC = () => (
   <>
     <RouteEffects />
     <Layout>
+      {NEWS_PREVIEW && (
+        <aside className="max-w-5xl mx-auto px-6 my-6" role="status">
+          <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-5 py-4 text-amber-200">
+            <strong>Local news preview</strong>
+            <p className="mt-1 text-sm">Drafts are shown here. Nothing has been published.</p>
+          </div>
+        </aside>
+      )}
       <Suspense fallback={<div className="flex h-screen items-center justify-center text-neutral-500">Loading...</div>}>
         <Routes>
           <Route path="/" element={<Home />} />

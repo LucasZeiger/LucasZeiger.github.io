@@ -24,8 +24,10 @@ for (const route of SITE_ROUTES) {
     assert(/<h1[\s>]/.test(html), `Missing rendered page content: ${route.path}`);
     assert(!html.includes('href="#/'), `Hash navigation found: ${route.path}`);
   }
-  for (const [, attribute, value] of html.matchAll(/\b(href|src)="(\/[^"#?]*)(?:[?#][^"]*)?"/g)) {
-    const target = resolve('dist', `.${value}`);
+  for (const [, attribute, value] of html.matchAll(/\b(href|src)="([^"]+)"/g)) {
+    const url = new URL(value, metadata.url);
+    if (url.origin !== new URL(metadata.url).origin) continue;
+    const target = resolve('dist', `.${decodeURIComponent(url.pathname)}`);
     const info = await stat(target).catch(() => null);
     assert(info, `Missing ${attribute} target ${value} on ${route.path}`);
     if (info.isDirectory()) await access(resolve(target, 'index.html'));
@@ -43,6 +45,7 @@ assert(!embedded.includes('id="root"'), 'Embedded app collides with React entry'
 const assets = await readdir('dist/assets');
 assert(assets.some(name => name.startsWith('SynthCanvasPage-') && name.endsWith('.js')), 'Synth is not split into its own chunk');
 assert(assets.some(name => name.startsWith('DungeonDesignerPage-') && name.endsWith('.js')), 'Dungeon designer is not split into its own chunk');
+assert(assets.some(name => name.startsWith('News-') && name.endsWith('.js')), 'News renderer is not split into its own chunk');
 assert(assets.some(name => name.endsWith('.webp')), 'Optimized images missing');
 for (const name of ['spatial_mapk', 'Slc7a5']) {
   const original = await sharp(`data/images/${name}.png`).ensureAlpha().raw().toBuffer({ resolveWithObject: true });

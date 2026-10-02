@@ -1,7 +1,7 @@
 {
   "name": "lucas-zeiger-portfolio",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.1.0",
   "type": "module",
   "homepage": "https://LucasZeiger.github.io",
   "engines": {
@@ -14,15 +14,23 @@
     "build": "node scripts/build.mjs",
     "check:build": "node scripts/check-build.mjs",
     "optimize:images": "node scripts/optimize-images.mjs",
+    "news:init": "node scripts/news-inbox.mjs init",
+    "news:inbox": "node scripts/news-inbox.mjs list",
+    "news:prepare": "node scripts/news-inbox.mjs prepare",
+    "news:approve": "node scripts/news-inbox.mjs approve",
+    "prenews:preview": "npm run optimize:images",
+    "news:preview": "vite --mode news-preview --host 127.0.0.1 --port 4175 --strictPort",
+    "check:news": "node --test scripts/news.test.mjs",
     "preview": "vite preview",
     "fetch:orcid": "node scripts/fetch-orcid-publications.mjs",
-    "predeploy": "npm run build && npm run check:build",
+    "predeploy": "npm run build && npm run check:build && npm run check:news",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "lucide-react": "^0.344.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-markdown": "^10.1.0",
     "react-router-dom": "^6.22.3"
   },
   "devDependencies": {
@@ -32,9 +40,11 @@
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.6.1",
     "gh-pages": "^6.1.1",
+    "gray-matter": "^4.0.3",
     "postcss": "^8.5.28",
     "sharp": "^0.35.5",
     "tailwindcss": "^3.4.19",
+    "turndown": "^7.2.4",
     "vite": "^7.2.4"
   }
 }

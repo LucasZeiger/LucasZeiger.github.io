@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { NEWS } from '../data/news';
+import NewsBody from '../components/NewsBody';
 
 const News: React.FC = () => {
   const location = useLocation();
@@ -56,15 +57,14 @@ const News: React.FC = () => {
             className="scroll-mt-28 border border-neutral-800/70 rounded-xl p-6 bg-neutral-900/30"
           >
             <div className="flex flex-wrap items-center gap-3 text-sm text-neutral-400">
+              {item.draft && <span className="px-2 py-1 rounded-full border border-amber-500/40 text-amber-300">Draft</span>}
               <span className="px-2 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-300">
                 {item.displayDate}
               </span>
               <span>{item.summary}</span>
             </div>
             <h2 className="text-2xl font-semibold text-white mt-4">{item.title}</h2>
-            <div className="text-neutral-300 leading-relaxed mt-4">
-              {item.body}
-            </div>
+            <NewsBody item={item} />
           </article>
         ))}
       </div>
