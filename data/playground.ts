@@ -11,8 +11,8 @@ export const PLAYGROUND_ITEMS: PlaygroundItem[] = [
     id: 'cellular-automata',
     title: 'Cellular automata visualizer',
     description: 'Interactive grid-based simulations and rule exploration. Works best in fullscreen.',
-    embedPath: '/playground/cellular-automata/index.html',
-    previewPath: '/playground/cellular-automata/index.html'
+    embedPath: '/experiments/cellular-automata/index.html',
+    previewPath: '/experiments/cellular-automata/index.html'
   },
   {
     id: 'halftone-loop',

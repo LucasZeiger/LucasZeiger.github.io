@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { lazy, useEffect, useRef, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { PLAYGROUND_ITEMS } from '../data/playground';
-import HalftoneVisualizer from '../components/HalftoneVisualizer';
-import LocationPulseDashboard from '../components/LocationPulseDashboard';
-import PublicationsExplorer from '../components/PublicationsExplorer';
-import DungeonDesignerPage from './DungeonDesignerPage';
-import SynthCanvasPage from './SynthCanvasPage';
+const HalftoneVisualizer = lazy(() => import('../components/HalftoneVisualizer'));
+const LocationPulseDashboard = lazy(() => import('../components/LocationPulseDashboard'));
+const PublicationsExplorer = lazy(() => import('../components/PublicationsExplorer'));
+const DungeonDesignerPage = lazy(() => import('./DungeonDesignerPage'));
+const SynthCanvasPage = lazy(() => import('./SynthCanvasPage'));
 
 const PlaygroundDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();

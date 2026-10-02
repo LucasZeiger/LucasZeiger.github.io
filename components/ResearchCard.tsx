@@ -19,6 +19,8 @@ const ResearchCard: React.FC<ResearchCardProps> = ({ project }) => {
         <img 
           src={project.imageUrl} 
           alt={project.title}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover transform md:group-hover:scale-105 transition-transform duration-700 grayscale-0 md:grayscale md:group-hover:grayscale-0"
         />
         <div className="absolute top-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">

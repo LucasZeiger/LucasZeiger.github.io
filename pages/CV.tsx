@@ -40,7 +40,6 @@ const CV: React.FC = () => {
           <p className="text-neutral-300">Academic and professional background.</p>
         </div>
         <a 
-          href="/cv.pdf" 
           onClick={handleDownload}
           className="hidden" /* kept for future use; intentionally hidden for now */
         >

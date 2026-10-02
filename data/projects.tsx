@@ -1,7 +1,7 @@
 import React from 'react';
 import { Project } from '../types';
-import spatialMapk from './images/spatial_mapk.png';
-import Slc7a5 from './images/Slc7a5.png';
+import spatialMapk from '../.generated/images/spatial_mapk.webp';
+import Slc7a5 from '../.generated/images/Slc7a5.webp';
 
 export const PROJECTS: Project[] = [
   {

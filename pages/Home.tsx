@@ -9,7 +9,7 @@ import orcidData from '../data/orcid-publications.json';
 import { SOCIAL_LINKS } from '../data/social';
 import ResearchCard from '../components/ResearchCard';
 import Card from '../components/Card';
-import profileImg from '../data/images/profile.jpg';
+import profileImg from '../.generated/images/profile.webp';
 import { Publication } from '../types';
 
 const Home: React.FC = () => {
@@ -130,6 +130,8 @@ const Home: React.FC = () => {
               <img 
                 src={profileImg} 
                 alt="Lucas Zeiger" 
+                fetchPriority="high"
+                decoding="async"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/60 via-transparent to-transparent" />

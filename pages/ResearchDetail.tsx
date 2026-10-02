@@ -26,7 +26,7 @@ const ResearchDetail: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto px-6 pb-24 animate-in fade-in duration-500">
       <button 
-        onClick={() => navigate(-1)} 
+        onClick={() => navigate('/research')}
         className="mb-8 flex items-center gap-2 text-sm text-neutral-300 hover:text-white transition-colors"
       >
         <ArrowLeft size={16} /> Back
@@ -49,12 +49,12 @@ const ResearchDetail: React.FC = () => {
 
         <div className="flex gap-4 pt-2">
            {project.link && (
-             <a href={project.link} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-4 py-2 bg-white text-black rounded-lg font-medium text-sm hover:bg-neutral-200 transition-colors">
+             <a href={/^https?:\/\//i.test(project.link) ? project.link : undefined} aria-disabled={!/^https?:\/\//i.test(project.link)} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-4 py-2 bg-white text-black rounded-lg font-medium text-sm hover:bg-neutral-200 transition-colors aria-disabled:opacity-50 aria-disabled:pointer-events-none">
                <ExternalLink size={16} /> Read Paper
              </a>
            )}
            {project.github && (
-             <a href={project.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-4 py-2 bg-neutral-900 border border-neutral-800 text-white rounded-lg font-medium text-sm hover:bg-neutral-800 transition-colors">
+             <a href={/^https?:\/\//i.test(project.github) ? project.github : undefined} aria-disabled={!/^https?:\/\//i.test(project.github)} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-4 py-2 bg-neutral-900 border border-neutral-800 text-white rounded-lg font-medium text-sm hover:bg-neutral-800 transition-colors aria-disabled:opacity-50 aria-disabled:pointer-events-none">
                <Github size={16} /> View Code
              </a>
            )}
@@ -66,6 +66,7 @@ const ResearchDetail: React.FC = () => {
         <img 
           src={project.imageUrl} 
           alt={project.title}
+          decoding="async"
           className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
         />
       </div>

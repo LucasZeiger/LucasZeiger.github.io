@@ -1,15 +1,22 @@
 {
   "name": "lucas-zeiger-portfolio",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "homepage": "https://LucasZeiger.github.io",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
+    "predev": "npm run optimize:images",
     "dev": "vite",
-    "build": "vite build",
+    "prebuild": "npm run optimize:images",
+    "build": "node scripts/build.mjs",
+    "check:build": "node scripts/check-build.mjs",
+    "optimize:images": "node scripts/optimize-images.mjs",
     "preview": "vite preview",
     "fetch:orcid": "node scripts/fetch-orcid-publications.mjs",
-    "predeploy": "npm run build",
+    "predeploy": "npm run build && npm run check:build",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
@@ -23,7 +30,11 @@
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.6.1",
     "gh-pages": "^6.1.1",
+    "postcss": "^8.5.28",
+    "sharp": "^0.35.5",
+    "tailwindcss": "^3.4.19",
     "vite": "^7.2.4"
   }
 }

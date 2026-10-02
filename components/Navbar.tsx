@@ -63,6 +63,9 @@ const Navbar: React.FC = () => {
         <button
           className="md:hidden text-neutral-300 hover:text-white focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
+          aria-label={isOpen ? 'Close navigation' : 'Open navigation'}
+          aria-expanded={isOpen}
+          aria-controls="mobile-navigation"
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -70,8 +73,10 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu */}
       <div
+        id="mobile-navigation"
+        {...(isOpen ? {} : { inert: '' })}
         className={`md:hidden absolute top-full left-0 w-full bg-neutral-950 border-b border-neutral-800 overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
+          isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
         <div className="flex flex-col items-center gap-6 py-8">
